@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@import "flowbite/src/themes/default";
+@plugin "flowbite/plugin";
 
 /**
   * A catch-all path to Django template files, JavaScript, and Python files
@@ -8,3 +10,4 @@
   * the scope of this path.
   */
 @source "../../../**/*.{html,py,js}";
+@source "../../node_modules/flowbite";
