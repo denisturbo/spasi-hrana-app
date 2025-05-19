@@ -1,18 +1,25 @@
 {% load static tailwind_tags %}
 <!DOCTYPE html>
-<html lang="bg" class="smooth-scroll">
+<html lang="bg" class="smooth-scroll h-full bg-white">
 	<head>
-    <title>{% block head_title%}{% endblock %}</title>
+    <title>{% block head_title%}SpasiHrana{% endblock %}</title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		{% tailwind_css %}
 	</head>
-	<body>
-	
-        {% block content %}
-        {% endblock %}
 
+	<body class="flex flex-col min-h-svh bg-gray-50">
+		{%block template%}
+		{% include 'components/header.html'%}
+			<main class="grow">
+        {% block content %} 
+		
+		{% endblock content %}
+			</main>
+		{% include 'components/footer.html'%}
+		{%endblock template%}
 		<script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+
 	</body>
 </html>

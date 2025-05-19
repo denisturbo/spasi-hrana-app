@@ -1,6 +1,13 @@
 from django.shortcuts import render
 
-# Create your views here.
+#Hrana app views 
 
 def index(request):
-    return render(request, 'base.html')
+    return render(request, 'landing/main.html')
+
+def faq(request):
+    return render(request, 'faq/faq.html')
+
+
+def baba(request):
+    return render(request, 'errors/404.html')

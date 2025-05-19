@@ -16,15 +16,21 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from hranaapp.views import index
+from hranaapp.views import index, faq, baba
 from django.conf import settings
-
+from django.conf.urls.static import static
+from auth import urls as auth_urls
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),
-]
+    path('faq/', faq, name='faq'),
+    path('404/', baba, name='baba'),
+    path('auth/', include(auth_urls.urlpatterns))]
+
+
+
 
 if settings.DEBUG:
     urlpatterns += [
     path("__reload__/", include("django_browser_reload.urls")),
-            ]
+            ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

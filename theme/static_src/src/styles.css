@@ -11,3 +11,4 @@
   */
 @source "../../../**/*.{html,py,js}";
 @source "../../node_modules/flowbite";
+@custom-variant dark (&:where(.dark, .dark *));
