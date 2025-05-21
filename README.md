@@ -6,3 +6,8 @@ Technologies Used:
   BE:
     Django
   FE: HTML/CSS/JS
+
+APP Guide:
+
+hranapp - Base App
+auth - Authentication
