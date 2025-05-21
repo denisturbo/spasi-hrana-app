@@ -25,7 +25,7 @@ urlpatterns = [
     path('', index, name='index'),
     path('faq/', faq, name='faq'),
     path('404/', baba, name='baba'),
-    path('auth/', include(auth_urls.urlpatterns, namespace='auth'))]
+    path('auth/', include(auth_urls.urlpatterns))]
 
 
 
