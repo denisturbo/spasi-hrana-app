@@ -19,13 +19,12 @@ from django.urls import path, include
 from hranaapp.views import index, faq, baba
 from django.conf import settings
 from django.conf.urls.static import static
-from auth import urls as auth_urls
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),
     path('faq/', faq, name='faq'),
     path('404/', baba, name='baba'),
-    path('auth/', include(auth_urls.urlpatterns))]
+    path('auth/', include("auth.urls"))]
 
 
 
