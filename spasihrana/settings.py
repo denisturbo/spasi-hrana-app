@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'hranaapp',
     'tailwind',
     'theme',
+    'customauth'
 ]
 
 TAILWIND_APP_NAME = 'theme'
