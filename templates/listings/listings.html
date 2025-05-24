@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{%block head_title%} {{ block.super }} | Всички оферти{%endblock %}
+
+{% block content%}
+
+<section>
+
+    <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+      <div class="grid grid-cols-1 gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 xl:gap-x-8">
+        {% for listing in listings%}
+        <a href="{%url 'listingDetail' listing.id %}" class="group">
+          <p class="mt-4 text-lg font-bold text-black-900">{{listing.title}}</p>
+            <div class="w-[228px] h-[320px] bg-gray-200 rounded-lg overflow-hidden relative">
+              {% if listing.thumbnail %}
+              <img src="{{ listing.thumbnail.url }}" alt="{{ listing.title }}" class="w-[228px] h-[320px] object-cover" />
+              {% else %}
+                <img src="https://i.imgur.com/N6uPna6.png" alt="Default Image" class="w-[228px] h-[320px] object-cover"/>
+              {% endif %}
+            </div>
+            <p class="mt-1 text-lg font-medium text-blue-900 flex items-center gap-2">
+           
+            тест тест
+          </p>
+        </a>
+
+        {%empty%}
+        <div class="col-span-full flex justify-center items-center">
+          <h1 class="text-2xl font-bold text-center text-gray-900">
+            Няма оферти..
+          </h1>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+
+</section>
+
+{%endblock%}
