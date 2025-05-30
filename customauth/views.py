@@ -1,19 +1,40 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.views import LogoutView, LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import CustomLoginForm
+from customauth.forms import CustomLoginForm, CustomerSignupForm, BusinessSignupForm
+
+from django.contrib.auth import login
+from django.shortcuts import redirect, render
+
 #Auth Views 
 
 
 def forgot_password(request):
     return render(request, 'auth/forgot_password.html')
 
-def signup(request):
-    return render(request, 'auth/signup.html')
+
+def customer_signup(request):
+    if request.method == 'POST':
+        form = CustomerSignupForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('/')
+    else:
+        form = CustomerSignupForm()
+    return render(request, 'auth/signup.html', {'form': form})
 
 
-
-
+def business_signup(request):
+    if request.method == 'POST':
+        form = BusinessSignupForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('/')
+    else:
+        form = BusinessSignupForm()
+    return render(request, 'auth/signup_business.html', {'form': form})
 
 class Logout(LoginRequiredMixin, LogoutView):
     template_name = 'auth/logout.html'
@@ -22,3 +43,6 @@ class Logout(LoginRequiredMixin, LogoutView):
 class Login(LoginView):
     template_name = "auth/signin.html"
     form_class = CustomLoginForm
+
+
+    

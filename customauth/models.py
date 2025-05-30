@@ -1,11 +1,27 @@
 from django.db import models
-from django.contrib.auth.models import UserManager
 from django.core.validators import MinValueValidator
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from decimal import Decimal
+from django.contrib.auth.models import BaseUserManager
+
 # Create your models here.
 
 class BaseSpasiHranaUser(PermissionsMixin, AbstractBaseUser):
+
+    class UserManager(BaseUserManager):
+        def create_user(self, email, username, user_type, password=None, **extra_fields):
+            if not email:
+                raise ValueError("моля въвете email")
+            email = self.normalize_email(email)
+            user = self.model(email=email, username=username, user_type=user_type, **extra_fields)
+            user.set_password(password)
+            user.save()
+            return user
+
+        def create_superuser(self, email, username, user_type='customer', password=None, **extra_fields):
+            extra_fields.setdefault('is_staff', True)
+            extra_fields.setdefault('is_superuser', True)
+            return self.create_user(email, username, user_type, password, **extra_fields)
 
     USER_TYPE_CHOICES = [
         ('customer', 'Customer'),
@@ -15,7 +31,7 @@ class BaseSpasiHranaUser(PermissionsMixin, AbstractBaseUser):
     username = models.CharField(max_length=50, unique=True)
     email = models.EmailField(unique=True)
     user_type = models.CharField(max_length=10, choices=USER_TYPE_CHOICES)
-    is_active = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=True) # True for Client.. can be turned OFF/False for Business (manaul approval)
     is_staff = models.BooleanField(default=False)
     objects = UserManager()
 
@@ -24,12 +40,6 @@ class BaseSpasiHranaUser(PermissionsMixin, AbstractBaseUser):
 
     def __str__(self):
         return self.email
-
-    def is_business(self):
-        return self.user_type == 'business'
-
-    def is_customer(self):
-        return self.user_type == 'customer'
 
     class Meta:
         verbose_name = "All User"
@@ -61,7 +71,6 @@ class BusinessUser(models.Model):
     business_type = models.CharField(max_length=10, choices=BUSINESS_TYPE_CHOICES)
 
 
-
     def __str__(self):
 
         return self.business_name
@@ -78,6 +87,7 @@ class Listing(models.Model):
     description = models.TextField()
     price = models.DecimalField(max_digits=6, decimal_places=2, validators=[MinValueValidator(0.01, message='Сумата трябва да е над 0.01')])
 
-    def eur_price(self):
+    def eur_price(self) -> Decimal:
         return round(self.price / Decimal("1.95"), 2)
+    
 

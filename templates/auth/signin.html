@@ -21,9 +21,7 @@
                     <label for="{{ form.password.id_password }}" class="block mb-2 text-sm font-medium text-gray-900">Парола</label>
                     {{ form.password }}
                 </div>
-                <div class="block mb-2 text-sm font-medium text-red-600">
-                {{ form.non_field_errors }}
-                </div>
+                                  {{ form.non_field_errors }}
                   <div class="flex">
                       <a href="#" class="text-sm font-medium text-orange-600 hover:underline">Забравена парола?</a>
                   </div>
@@ -31,12 +29,14 @@
 <input type="hidden" name="next" value="{{ next }}">
 
                   <p class="text-sm font-light text-gray-500 ">
-                      Ако нямаш профил. <a href="#" class="font-medium text-orange-500 hover:underline">Създай от тук</a>
+                      Ако нямаш профил. <a href="{%url 'signup'%}" class="font-medium text-orange-500 hover:underline">Създай от тук</a>
                   </p>
               </form>
           </div>
       </div>
+
     </div> 
+    
 </section>
 
 {%endblock%}
