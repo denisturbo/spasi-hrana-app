@@ -1,7 +1,5 @@
 from django.db import models
-from django.core.validators import MinValueValidator
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
-from decimal import Decimal
 from django.contrib.auth.models import BaseUserManager
 
 # Create your models here.
@@ -79,15 +77,4 @@ class CustomerUser(models.Model):
     user = models.OneToOneField(BaseSpasiHranaUser, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
-
-
-class Listing(models.Model):
-    connection = models.ForeignKey(BusinessUser, on_delete=models.CASCADE)
-    title = models.CharField(max_length=100)
-    description = models.TextField()
-    price = models.DecimalField(max_digits=6, decimal_places=2, validators=[MinValueValidator(0.01, message='Сумата трябва да е над 0.01')])
-
-    def eur_price(self) -> Decimal:
-        return round(self.price / Decimal("1.95"), 2)
-    
 

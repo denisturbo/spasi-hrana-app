@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import BaseSpasiHranaUser, BusinessUser, Listing, CustomerUser
+from .models import BaseSpasiHranaUser, BusinessUser, CustomerUser
 
 @admin.register(BaseSpasiHranaUser) # All users
 class BaseUser(admin.ModelAdmin):
@@ -13,10 +13,4 @@ class BusinessUserAdmin(admin.ModelAdmin): #Business only
 @admin.register(CustomerUser)
 class CustomerUserAdmin(admin.ModelAdmin): #Customers only
     list_display = ['user', 'first_name', 'last_name']
-
-
-
-@admin.register(Listing)
-class ListingAdmin(admin.ModelAdmin): #listings of businesses..
-    list_display = ['pk' ,'connection', 'title', 'description', 'price']
 
