@@ -2,7 +2,10 @@
 {%block head_title%} {{listing_detail.title}} Оферта{%endblock %}
 
 {% block content%}
-<p>{{listing_detail.price}}</p>
+<p>Цена: {{listing_detail.price}} лв</p>
+<p>Име на бизнеса: {{listing_detail.connection.full_name}}</p>
+<p>{{listing_detail.eur_price}} евро</p>
+
 
 
 {%endblock%}

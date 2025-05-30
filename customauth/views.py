@@ -1,10 +1,9 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import logout
-
+from django.contrib.auth.views import LogoutView, LoginView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .forms import CustomLoginForm
 #Auth Views 
 
-def signin(request): 
-    return render(request, 'auth/signin.html')
 
 def forgot_password(request):
     return render(request, 'auth/forgot_password.html')
@@ -14,10 +13,12 @@ def signup(request):
 
 
 
-def logout_view(request):
-    logout(request)
-    return redirect('signin')
 
 
-
+class Logout(LoginRequiredMixin, LogoutView):
+    template_name = 'auth/logout.html'
+    next_page = '/'
     
+class Login(LoginView):
+    template_name = "auth/signin.html"
+    form_class = CustomLoginForm

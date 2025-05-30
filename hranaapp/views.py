@@ -1,13 +1,18 @@
 from django.shortcuts import render
-from .models import Listing
+from customauth.models import Listing
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from customauth.models import BaseSpasiHranaUser
+from django.db.models import Count, Q
 
 #Hrana app views 
 
 def index(request):
-    return render(request, 'landing/main.html')
-
+    counts = BaseSpasiHranaUser.objects.aggregate(
+        business=Count('pk', filter=Q(user_type='business')),
+        customers=Count('pk', filter=Q(user_type='customer'))
+    )
+    return render(request, 'landing/main.html', counts)
 def faq(request):
     return render(request, 'faq/faq.html')
 
