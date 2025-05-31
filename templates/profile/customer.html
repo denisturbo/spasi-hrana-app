@@ -1,0 +1,145 @@
+
+<section class='py-8 md:py-8'>
+  <div class="mx-auto max-w-screen-lg px-4 2xl:px-0">
+    <h2 class="mb-4 text-xl font-semibold text-gray-900  sm:text-2xl md:mb-6">Преглед на профила</h2>
+    <div class="grid grid-cols-2 gap-6 border-b border-t border-gray-200 py-4  md:py-8 lg:grid-cols-4 xl:gap-16">
+      <div>
+        <svg class="mb-2 h-8 w-8 text-gray-400 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312" />
+        </svg>
+        <h3 class="mb-2 text-gray-500 ">Orders made</h3>
+        <span class="flex items-center text-2xl font-bold text-gray-900 "
+          >24
+        </span>
+       
+      </div>
+      <div>
+        <svg class="mb-2 h-8 w-8 text-gray-400 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+          <path stroke="currentColor" stroke-width="2" d="M11.083 5.104c.35-.8 1.485-.8 1.834 0l1.752 4.022a1 1 0 0 0 .84.597l4.463.342c.9.069 1.255 1.2.556 1.771l-3.33 2.723a1 1 0 0 0-.337 1.016l1.03 4.119c.214.858-.71 1.552-1.474 1.106l-3.913-2.281a1 1 0 0 0-1.008 0L7.583 20.8c-.764.446-1.688-.248-1.474-1.106l1.03-4.119A1 1 0 0 0 6.8 14.56l-3.33-2.723c-.698-.571-.342-1.702.557-1.771l4.462-.342a1 1 0 0 0 .84-.597l1.753-4.022Z" />
+        </svg>
+        <h3 class="mb-2 text-gray-500 ">Reviews added</h3>
+        <span class="flex items-center text-2xl font-bold text-gray-900 "
+          >16
+         
+        </span>
+       
+      </div>
+      <div>
+        <svg class="mb-2 h-8 w-8 text-gray-400 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z" />
+        </svg>
+        <h3 class="mb-2 text-gray-500 ">Favorite products added</h3>
+        <span class="flex items-center text-2xl font-bold text-gray-900 "
+          >8
+
+        </span>
+        
+      </div>
+      <div>
+        <svg class="mb-2 h-8 w-8 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9h13a5 5 0 0 1 0 10H7M3 9l4-4M3 9l4 4" />
+        </svg>
+        <h3 class="mb-2 text-gray-500 ">Product returns</h3>
+        <span class="flex items-center text-2xl font-bold text-gray-900"
+          >2
+
+        </span>
+       
+      </div>
+    </div>
+    <div class="py-4 md:py-8">
+      <div class="mb-4 grid gap-4 sm:grid-cols-2 sm:gap-8 lg:gap-16">
+        <div class="space-y-4">
+          <div class="flex space-x-4">
+            <img class="h-16 w-16 rounded-lg" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/helene-engels.png" alt="Helene avatar" />
+            <div>
+              <span class="mb-2 inline-block rounded bg-primary-100 px-2.5 py-0.5 text-xs font-medium text-primary-800 ">{{user.user_type|capfirst}}</span>
+              <h2 class="flex items-center text-xl font-bold leading-none text-gray-900  sm:text-2xl">{{customer.full_name }}</h2>
+            </div>
+          </div>
+          <dl class="">
+            <dt class="font-semibold text-gray-900 ">Email Address</dt>
+            <dd class="text-gray-500">{{user.email}}</dd>
+          </dl>
+          
+          
+        </div>
+        <div class="space-y-4">
+          <dl>
+            <dt class="font-semibold text-gray-900 ">Телефонен номер</dt>
+            <dd class="text-gray-500 ">+359 999 9999 ПРОМЕНИ ТУК</dd>
+          </dl>
+        
+        </div>
+      </div>
+    </div>
+   {% comment %} <div class="rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800 md:p-8">
+      <h3 class="mb-4 text-xl font-semibold text-gray-900 dark:text-white">Последни поръчки</h3>
+       {%for order in all_listings%} секцията с поръчките.. още не е свързана за клиенти
+      <div class="flex flex-wrap items-center gap-y-4 pt-4 md:pt-5">
+        <dl class="w-1/2 sm:w-48">
+          <dt class="text-base font-medium text-gray-500 dark:text-gray-400">Номер на поръчка:</dt>
+          <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">
+            <a href="#" class="hover:underline">#{{order.pk}}</a>
+          </dd>
+        </dl>
+
+        <dl class="w-1/2 sm:w-1/4 md:flex-1 lg:w-auto">
+          <dt class="text-base font-medium text-gray-500 dark:text-gray-400">Дата:</dt>
+          <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">{{order.created_on}}</dd>
+        </dl>
+
+        <dl class="w-1/2 sm:w-1/5 md:flex-1 lg:w-auto">
+          <dt class="text-base font-medium text-gray-500 dark:text-gray-400">Цена:</dt>
+          <dd class="mt-1.5 text-base font-semibold text-gray-900 dark:text-white">{{order.price}} лв // {{order.eur_price}} €</dd>
+        </dl>
+
+        <dl class="w-1/2 sm:w-1/4 sm:flex-1 lg:w-auto">
+          <dt class="text-base font-medium text-gray-500 dark:text-gray-400">Status:</dt>
+          <dd class="mt-1.5 inline-flex items-center rounded bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800 dark:bg-green-900 dark:text-green-300">
+            <svg class="me-1 h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11.917 9.724 16.5 19 7.5"></path>
+            </svg>
+            Completed
+          </dd>
+        </dl>
+
+        <div class="w-full sm:flex sm:w-32 sm:items-center sm:justify-end sm:gap-4">
+          <button
+            id="actionsMenuDropdownModal{{order.pk}}"
+            data-dropdown-toggle="dropdownOrderModal{{order.pk}}"
+            type="button"
+            class="flex w-full items-center justify-center rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700 md:w-auto"
+          >
+            Actions
+            <svg class="-me-0.5 ms-1.5 h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div id="dropdownOrderModal{{order.pk}}" class="z-10 hidden w-40 divide-y divide-gray-100 rounded-lg bg-white shadow dark:bg-gray-700" data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="bottom">
+            <ul class="p-2 text-left text-sm font-medium text-gray-500 dark:text-gray-400" aria-labelledby="actionsMenuDropdown13">
+              <li>
+                <a href="#" class="group inline-flex w-full items-center rounded-md px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white">
+                  <svg class="me-1.5 h-4 w-4 text-gray-400 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.651 7.65a7.131 7.131 0 0 0-12.68 3.15M18.001 4v4h-4m-7.652 8.35a7.13 7.13 0 0 0 12.68-3.15M6 20v-4h4"></path>
+                  </svg>
+                  <span>Order again</span>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="group inline-flex w-full items-center rounded-md px-3 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white">
+                  <svg class="me-1.5 h-4 w-4 text-gray-400 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-width="2" d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z"></path>
+                    <path stroke="currentColor" stroke-width="2" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"></path>
+                  </svg>
+                  Order details
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+     {%endfor%} {% endcomment %}
+    </div>
+  </div>
+</section>

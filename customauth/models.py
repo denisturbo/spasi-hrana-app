@@ -51,6 +51,8 @@ class BaseSpasiHranaUser(PermissionsMixin, AbstractBaseUser):
             ("can_order_listing", "Can Order Listing - deletes order from Client to Business Side"),
         )
 
+    
+
 
 
 class BusinessUser(models.Model):
@@ -78,3 +80,5 @@ class CustomerUser(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
 
+    def full_name(self):
+        return f"{self.first_name} {self.last_name}"

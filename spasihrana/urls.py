@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from hranaapp.views import index, faq, baba, ListingDetailView, ListingView, business
+from hranaapp.views import index, faq, baba, ListingDetailView, ListingView, business, profile
 from django.conf import settings
 from django.conf.urls.static import static
 urlpatterns = [
@@ -27,7 +27,9 @@ urlpatterns = [
     path('auth/', include("customauth.urls")),
     path('listing/<int:pk>/', ListingDetailView.as_view(), name='listingDetail'),
     path('listings/', ListingView.as_view(), name='listings' ),
-    path('business/', business, name='business')
+    path('business/', business, name='business'),
+    path('profile/', profile, name='profile'),
+
 ]
 
 
