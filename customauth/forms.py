@@ -1,5 +1,6 @@
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from django.forms import CharField, PasswordInput, EmailField, EmailInput, ChoiceField, TextInput, RadioSelect
+from django.forms import CharField, EmailField, ChoiceField
+from django.forms.widgets import TelInput, PasswordInput, RadioSelect, TextInput, EmailInput
 from customauth.models import BusinessUser, BaseSpasiHranaUser, CustomerUser
 
 class CustomLoginForm(AuthenticationForm):
@@ -53,9 +54,10 @@ class CustomerSignupForm(UserCreationForm):
 
     class Meta:
         model = BaseSpasiHranaUser
-        fields = ['username', 'email']
+        fields = ['username', 'email', 'phone_number']
         widgets = {'username':TextInput(attrs={"placeholder": "Потребителско име", "class": "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5", "autofocus": True}),
-                   'email': EmailInput(attrs={"autocomplete": "email", "placeholder": "Твоят email", "class": "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5", "autofocus": True}),
+                   'email': EmailInput(attrs={"autocomplete": "email", "placeholder": "Вашият email", "class": "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5", "autofocus": True}),
+                'phone_number': TelInput(attrs={"placeholder": "Тел. номер", "class": 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5'})
 
 }
 
@@ -89,6 +91,7 @@ max_length=50, widget=TextInput(attrs={"placeholder": "ул. Лилия 1", "cla
         fields = ['username', 'email']
         widgets = {'username':TextInput(attrs={"placeholder": "Потребителско име", "class": "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5", "autofocus": True}),
                 'email': EmailInput(attrs={"autocomplete": "email", "placeholder": "Твоят email", "class": "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5", "autofocus": True}),
+                'phone_number': TelInput(attrs={"placeholder": "Тел. номер", "class": 'bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5'})
 
 }
 

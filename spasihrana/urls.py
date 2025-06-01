@@ -25,6 +25,7 @@ urlpatterns = [
     path('faq/', faq, name='faq'),
     path('404/', baba, name='baba'),
     path('auth/', include("customauth.urls")),
+    path('', include('business.urls')),
     path('listing/<int:pk>/', ListingDetailView.as_view(), name='listingDetail'),
     path('listings/', ListingView.as_view(), name='listings' ),
     path('business/', business, name='business'),
@@ -38,4 +39,4 @@ urlpatterns = [
 if settings.DEBUG:
     urlpatterns += [
     path("__reload__/", include("django_browser_reload.urls")),
-            ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+            ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

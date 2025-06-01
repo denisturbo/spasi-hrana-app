@@ -2,9 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.views import LogoutView, LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from customauth.forms import CustomLoginForm, CustomerSignupForm, BusinessSignupForm
-
 from django.contrib.auth import login
-from django.shortcuts import redirect, render
 
 #Auth Views 
 

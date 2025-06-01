@@ -14,13 +14,13 @@ def index(request):
     )
     return render(request, 'landing/main.html', counts)
 def faq(request):
-    return render(request, 'faq/faq.html')
+    return render(request, 'landing/faq.html')
 
 def baba(request):
     return render(request, 'errors/404.html')
 
 def business(request):
-    return render(request, 'business/business.html')    
+    return render(request, 'landing/business.html')    
 
 def profile(request): # Profile View for both types.. Business & Customer. Renders different based on Role
     current_user = request.user
