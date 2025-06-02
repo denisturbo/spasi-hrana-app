@@ -1,6 +1,5 @@
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from django.forms import CharField, EmailField, ChoiceField, ModelForm
-from django.forms.widgets import TelInput, PasswordInput, RadioSelect, TextInput, EmailInput
+from django.forms import ModelForm
+from django.forms.widgets import TextInput, NumberInput
 from business.models import Listing
 
 
@@ -9,4 +8,9 @@ class ListingCreation(ModelForm):
     class Meta:
         model = Listing
         fields = '__all__'
+        widgets = {'title': TextInput(attrs={"placeholder": "Заглавие", "class": "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5", "autofocus": True}),
+                   'description': TextInput(attrs={"placeholder": "Описание на продукта", "class": "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5", "autofocus": True}),
+                   'price':NumberInput(attrs={"placeholder": "Потребителско име", "class": "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5", "autofocus": True}),
+            
+        }
         
