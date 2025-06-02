@@ -43,7 +43,7 @@ def profile(request): # Profile View for both types.. Business & Customer. Rende
 
 class ListingView(LoginRequiredMixin, ListView):
     model = Listing
-    template_name = 'listings/listings.html'
+    template_name = 'customer/listings/listings.html'
     context_object_name = 'listings'
 
     def get_queryset(self):
@@ -51,7 +51,7 @@ class ListingView(LoginRequiredMixin, ListView):
 
 class ListingDetailView(LoginRequiredMixin, DetailView):
     model = Listing
-    template_name = 'listings/listingdetail.html'
+    template_name = 'customer/listings/listingdetail.html'
     context_object_name = 'listing_detail'
 
     def get_context_data(self, **kwargs):

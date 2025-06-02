@@ -12,28 +12,34 @@ def forgot_password(request):
 
 
 def customer_signup(request):
-    if request.method == 'POST':
-        form = CustomerSignupForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            return redirect('/')
+    if not request.user.is_authenticated:
+        if request.method == 'POST':
+            form = CustomerSignupForm(request.POST)
+            if form.is_valid():
+                user = form.save()
+                login(request, user)
+                return redirect('/')
+        else:
+            form = CustomerSignupForm()
+        return render(request, 'auth/signup.html', {'form': form})
     else:
-        form = CustomerSignupForm()
-    return render(request, 'auth/signup.html', {'form': form})
+        return redirect('/')
 
 
 def business_signup(request):
-    if request.method == 'POST':
-        form = BusinessSignupForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            return redirect('/')
+    if not request.user.is_authenticated:
+        if request.method == 'POST':
+            form = BusinessSignupForm(request.POST)
+            if form.is_valid():
+                user = form.save()
+                login(request, user)
+                return redirect('/')
+        else:
+            form = BusinessSignupForm()
+        return render(request, 'auth/signup_business.html', {'form': form})
     else:
-        form = BusinessSignupForm()
-    return render(request, 'auth/signup_business.html', {'form': form})
-
+        return redirect('/')
+               
 class Logout(LoginRequiredMixin, LogoutView):
     template_name = 'auth/logout.html'
     next_page = '/'
