@@ -7,6 +7,7 @@
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
+    --color-red-400: #F87171;
     --color-red-500: #EF4444;
     --color-red-600: #DC2626;
     --color-orange-300: #F6AD55;
@@ -15,6 +16,7 @@
     --color-orange-600: #C05621;
     --color-orange-700: #9C4221;
     --color-orange-800: #7B341E;
+    --color-orange-900: #652B19;
     --color-yellow-300: #FCD34D;
     --color-yellow-500: #F59E0B;
     --color-yellow-600: #D97706;
@@ -321,6 +323,9 @@
   .me-4 {
     margin-inline-end: calc(var(--spacing) * 4);
   }
+  .mt-1 {
+    margin-top: calc(var(--spacing) * 1);
+  }
   .mt-1\.5 {
     margin-top: calc(var(--spacing) * 1.5);
   }
@@ -396,6 +401,9 @@
   .h-16 {
     height: calc(var(--spacing) * 16);
   }
+  .h-\[500px\] {
+    height: 500px;
+  }
   .h-full {
     height: 100%;
   }
@@ -404,6 +412,9 @@
   }
   .min-h-full {
     min-height: 100%;
+  }
+  .min-h-screen {
+    min-height: 100vh;
   }
   .min-h-svh {
     min-height: 100svh;
@@ -444,6 +455,9 @@
   .w-full {
     width: 100%;
   }
+  .w-max {
+    width: max-content;
+  }
   .max-w-2xl {
     max-width: var(--container-2xl);
   }
@@ -465,6 +479,9 @@
   .max-w-screen-xl {
     max-width: var(--breakpoint-xl);
   }
+  .min-w-screen {
+    min-width: 100vw;
+  }
   .shrink-0 {
     flex-shrink: 0;
   }
@@ -479,6 +496,9 @@
   }
   .rotate-180 {
     rotate: 180deg;
+  }
+  .cursor-pointer {
+    cursor: pointer;
   }
   .list-none {
     list-style-type: none;
@@ -651,11 +671,17 @@
   .bg-green-100 {
     background-color: var(--color-green-100);
   }
+  .bg-orange-500 {
+    background-color: var(--color-orange-500);
+  }
   .bg-orange-600 {
     background-color: var(--color-orange-600);
   }
   .bg-orange-700 {
     background-color: var(--color-orange-700);
+  }
+  .bg-red-400 {
+    background-color: var(--color-red-400);
   }
   .bg-red-500 {
     background-color: var(--color-red-500);
@@ -875,6 +901,9 @@
   .text-orange-600 {
     color: var(--color-orange-600);
   }
+  .text-orange-900 {
+    color: var(--color-orange-900);
+  }
   .text-red-600 {
     color: var(--color-red-600);
   }
@@ -892,6 +921,10 @@
   }
   .shadow {
     --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .shadow-md {
+    --tw-shadow: 0 4px 6px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 2px 4px -2px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
   }
   .shadow-sm {
@@ -943,6 +976,11 @@
   @media (hover: hover) {
     .hover\:bg-gray-100:hover {
       background-color: var(--color-gray-100);
+    }
+  }
+  @media (hover: hover) {
+    .hover\:bg-orange-600:hover {
+      background-color: var(--color-orange-600);
     }
   }
   @media (hover: hover) {
@@ -1027,8 +1065,23 @@
     outline-color: var(--color-yellow-600);
   }
   @media (width >= 40rem) {
+    .sm\:col-span-1 {
+      grid-column: span 1 / span 1;
+    }
+  }
+  @media (width >= 40rem) {
+    .sm\:col-span-2 {
+      grid-column: span 2 / span 2;
+    }
+  }
+  @media (width >= 40rem) {
     .sm\:mt-0 {
       margin-top: calc(var(--spacing) * 0);
+    }
+  }
+  @media (width >= 40rem) {
+    .sm\:mb-5 {
+      margin-bottom: calc(var(--spacing) * 5);
     }
   }
   @media (width >= 40rem) {
@@ -1104,6 +1157,11 @@
   @media (width >= 40rem) {
     .sm\:gap-4 {
       gap: calc(var(--spacing) * 4);
+    }
+  }
+  @media (width >= 40rem) {
+    .sm\:gap-6 {
+      gap: calc(var(--spacing) * 6);
     }
   }
   @media (width >= 40rem) {
@@ -1502,6 +1560,9 @@
   }
   .dark\:bg-orange-600:where(.dark, .dark *) {
     background-color: var(--color-orange-600);
+  }
+  .dark\:text-gray-300:where(.dark, .dark *) {
+    color: var(--color-gray-300);
   }
   .dark\:text-gray-400:where(.dark, .dark *) {
     color: var(--color-gray-400);

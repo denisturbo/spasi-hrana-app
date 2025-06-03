@@ -11,7 +11,7 @@ from django.contrib.auth.decorators import permission_required
 def create(request):
     if request.method == "POST":
         
-        form = ListingCreation(request.POST)
+        form = ListingCreation(request.POST, request.FILES)
         if form.is_valid(): 
             new_list = form.save(commit=False)
             new_list.connection = request.user.businessuser # connection e vruzkata mejdu Listinga i modela za user
