@@ -7,7 +7,7 @@
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
-    --color-red-400: #F87171;
+    --color-red-500: #EF4444;
     --color-red-600: #DC2626;
     --color-orange-300: #F6AD55;
     --color-orange-400: #ED8936;
@@ -71,7 +71,6 @@
     --text-7xl: 4.5rem;
     --text-7xl--line-height: 1;
     --font-weight-light: 300;
-    --font-weight-normal: 400;
     --font-weight-medium: 500;
     --font-weight-semibold: 600;
     --font-weight-bold: 700;
@@ -301,9 +300,6 @@
   .my-4 {
     margin-block: calc(var(--spacing) * 4);
   }
-  .-ms-0\.5 {
-    margin-inline-start: calc(var(--spacing) * -0.5);
-  }
   .ms-1\.5 {
     margin-inline-start: calc(var(--spacing) * 1.5);
   }
@@ -342,9 +338,6 @@
   }
   .mr-2 {
     margin-right: calc(var(--spacing) * 2);
-  }
-  .mb-0\.5 {
-    margin-bottom: calc(var(--spacing) * 0.5);
   }
   .mb-1 {
     margin-bottom: calc(var(--spacing) * 1);
@@ -400,9 +393,6 @@
   .h-10 {
     height: calc(var(--spacing) * 10);
   }
-  .h-12 {
-    height: calc(var(--spacing) * 12);
-  }
   .h-16 {
     height: calc(var(--spacing) * 16);
   }
@@ -442,9 +432,6 @@
   .w-10 {
     width: calc(var(--spacing) * 10);
   }
-  .w-12 {
-    width: calc(var(--spacing) * 12);
-  }
   .w-16 {
     width: calc(var(--spacing) * 16);
   }
@@ -453,9 +440,6 @@
   }
   .w-60 {
     width: calc(var(--spacing) * 60);
-  }
-  .w-auto {
-    width: auto;
   }
   .w-full {
     width: 100%;
@@ -673,8 +657,8 @@
   .bg-orange-700 {
     background-color: var(--color-orange-700);
   }
-  .bg-red-400 {
-    background-color: var(--color-red-400);
+  .bg-red-500 {
+    background-color: var(--color-red-500);
   }
   .bg-white {
     background-color: var(--color-white);
@@ -843,10 +827,6 @@
   .font-medium {
     --tw-font-weight: var(--font-weight-medium);
     font-weight: var(--font-weight-medium);
-  }
-  .font-normal {
-    --tw-font-weight: var(--font-weight-normal);
-    font-weight: var(--font-weight-normal);
   }
   .font-semibold {
     --tw-font-weight: var(--font-weight-semibold);
@@ -1074,11 +1054,6 @@
   @media (width >= 40rem) {
     .sm\:w-48 {
       width: calc(var(--spacing) * 48);
-    }
-  }
-  @media (width >= 40rem) {
-    .sm\:w-auto {
-      width: auto;
     }
   }
   @media (width >= 40rem) {
@@ -1503,12 +1478,6 @@
   .rtl\:text-right:where(:dir(rtl), [dir="rtl"], [dir="rtl"] *) {
     text-align: right;
   }
-  .dark\:flex:where(.dark, .dark *) {
-    display: flex;
-  }
-  .dark\:hidden:where(.dark, .dark *) {
-    display: none;
-  }
   .dark\:border:where(.dark, .dark *) {
     border-style: var(--tw-border-style);
     border-width: 1px;
@@ -1536,9 +1505,6 @@
   }
   .dark\:text-gray-400:where(.dark, .dark *) {
     color: var(--color-gray-400);
-  }
-  .dark\:text-gray-500:where(.dark, .dark *) {
-    color: var(--color-gray-500);
   }
   .dark\:text-green-300:where(.dark, .dark *) {
     color: var(--color-green-300);

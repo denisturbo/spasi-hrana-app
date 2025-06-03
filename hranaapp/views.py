@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from business.models import Listing
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -8,11 +8,17 @@ from django.db.models import Count, Q
 #Hrana app views 
 
 def index(request):
-    counts = BaseSpasiHranaUser.objects.aggregate(
-        business=Count('pk', filter=Q(user_type='business')),
-        customers=Count('pk', filter=Q(user_type='customer'))
-    )
-    return render(request, 'landing/main.html', counts)
+    if not request.user.is_authenticated:
+        counts = BaseSpasiHranaUser.objects.aggregate(
+            business=Count('pk', filter=Q(user_type='business')),
+            customers=Count('pk', filter=Q(user_type='customer'))
+        )
+        return render(request, 'landing/main.html', counts)
+    
+    else:
+
+        return render(request, 'business/landing.html')
+    
 def faq(request):
     return render(request, 'landing/faq.html')
 
@@ -33,8 +39,6 @@ def profile(request): # Profile View for both types.. Business & Customer. Rende
         all_listings = Listing.objects.filter(connection=business) # shows all listings of logged business
     else:
         customer = CustomerUser.objects.get(user=current_user)
-
-
     return render(request, 'profile/profile.html', {'current_user': current_user,
                                                     'business': business,
                                                     "all_listings": all_listings,

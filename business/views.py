@@ -10,9 +10,12 @@ from django.contrib.auth.decorators import permission_required
 @permission_required('business.can_create_listing', raise_exception=True) 
 def create(request):
     if request.method == "POST":
+        
         form = ListingCreation(request.POST)
-        if form.is_valid():
-            form.save()
+        if form.is_valid(): 
+            new_list = form.save(commit=False)
+            new_list.connection = request.user.businessuser # connection e vruzkata mejdu Listinga i modela za user
+            new_list.save()
             return redirect('/')
     else:
         form = ListingCreation()

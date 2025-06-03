@@ -325,3 +325,5 @@ dist
 /dataSources/
 /dataSources.local.xml
 
+# Media
+uploads
