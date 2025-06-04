@@ -8,21 +8,21 @@
         <form method='POST' enctype="multipart/form-data" action="{% url 'listingcreation' %}">
             {%csrf_token%}
           <div class="grid gap-4 mb-4 sm:grid-cols-2 sm:gap-6 sm:mb-5">
-              <div class="sm:col-span-2">
+              <div class="sm:col-span-2"> 
                     <label for="{{ form.title.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900">Име на продукта</label>
                   {{form.title}}
               </div>
-              <div class="h-full">
-                    <label for="{{ form.price.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900">Цена</label>
+              <div class="sm:col-span-2">
+                    <label for="{{ form.price.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900">Цена (в лева) </label>
                   {{form.price}}
               </div>
-              <div class="max-w-lg">
+              <div class="sm:col-span-2">
                     <label for="{{ form.image.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900">Снимка на продукта</label>
                   {{form.image}}
               <div class="mt-1 text-sm text-gray-500">Добави снимка на продукта (16:9 формат)</div>
               </div>
               <div class="sm:col-span-2">
-                {{form.description.label}}
+                  <label for="{{ form.description.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900">Описание</label>
                   {{form.description}}
               </div>    
           </div>

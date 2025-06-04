@@ -8,16 +8,17 @@ from django.db.models import Count, Q
 #Hrana app views 
 
 def index(request):
-    if not request.user.is_authenticated:
-        counts = BaseSpasiHranaUser.objects.aggregate(
-            business=Count('pk', filter=Q(user_type='business')),
-            customers=Count('pk', filter=Q(user_type='customer'))
-        )
+    counts = BaseSpasiHranaUser.objects.aggregate(
+        business=Count('pk', filter=Q(user_type='business')),
+        customers=Count('pk', filter=Q(user_type='customer'))
+    )
+    if request.user.is_authenticated and request.user.user_type == 'customer':
+        return render(request, 'landing/main.html', counts) # shte bude smeneno.. unauth i auth kato customer pokazva edno i sushto
+    if request.user.is_authenticated and request.user.user_type == 'business':
+        return render(request, 'business/main.html')
+    else:
         return render(request, 'landing/main.html', counts)
     
-    else:
-
-        return render(request, 'business/landing.html')
     
 def faq(request):
     return render(request, 'landing/faq.html')
