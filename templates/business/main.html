@@ -1,11 +1,10 @@
 {%extends 'base.html'%}
 {%block head_title%} {{ block.super }} | Начална страница {%endblock %}
 {%block template%}
-<div class="antialiased bg-gray-50">
 {%include 'components/business/navbar.html'%}
 {%include 'components/business/sidenav.html'%}
 {%block content%}
 {%include 'components/business/main.html'%}
-</div>
+
 {% endblock content%}
 {%endblock template%}
