@@ -15,7 +15,8 @@ def index(request):
     if request.user.is_authenticated and request.user.user_type == 'customer':
         return render(request, 'landing/main.html', counts) # shte bude smeneno.. unauth i auth kato customer pokazva edno i sushto
     if request.user.is_authenticated and request.user.user_type == 'business':
-        return render(request, 'business/main.html')
+        business_context = BusinessUser.objects.get(user=request.user)
+        return render(request, 'business/main.html', {"business": business_context})
     else:
         return render(request, 'landing/main.html', counts)
     

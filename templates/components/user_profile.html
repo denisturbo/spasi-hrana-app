@@ -1,10 +1,6 @@
 <button type="button" class="flex items-center justify-center text-sm bg-gray-800 rounded-full mr-2 focus:ring-4 focus:ring-gray-300" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
     <span class="sr-only">Отвори меню</span>
-    {% if user.user_type == 'business'%}
-    <img class="w-10 h-10 rounded-full" src="{{business.profile_picture.url}}" alt="user photo">
-    {%else%}
     <img class="w-10 h-10 rounded-full" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="user photo">
-    {%endif%}
 </button>
 
       <!-- Dropdown menu -->
