@@ -2,11 +2,5 @@
 {%block head_title%} {{ block.super }} | Профил{%endblock %}
 
 {% block content%}
-{%if user.user_type == 'business' %}
-
-{%include 'profile/business.html'%}
-{%else%}
 {%include 'profile/customer.html'%}
-
-{%endif%}
 {%endblock%}  

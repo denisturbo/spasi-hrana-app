@@ -4,6 +4,7 @@ from django.views.generic import ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from customauth.models import BaseSpasiHranaUser, BusinessUser, CustomerUser
 from django.db.models import Count, Q
+from django.contrib.auth.decorators import permission_required
 
 #Hrana app views 
 
@@ -30,6 +31,8 @@ def baba(request):
 def business(request):
     return render(request, 'landing/business.html')    
 
+
+@permission_required('customauth.can_order_listing', raise_exception=True)
 def profile(request): # Profile View for both types.. Business & Customer. Renders different based on Role
     current_user = request.user
     business = None
