@@ -7,8 +7,6 @@
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
-    --color-red-400: #F87171;
-    --color-red-500: #EF4444;
     --color-red-600: #DC2626;
     --color-orange-300: #F6AD55;
     --color-orange-400: #ED8936;
@@ -578,6 +576,9 @@
   .gap-1 {
     gap: calc(var(--spacing) * 1);
   }
+  .gap-2 {
+    gap: calc(var(--spacing) * 2);
+  }
   .gap-3 {
     gap: calc(var(--spacing) * 3);
   }
@@ -1093,11 +1094,6 @@
     }
   }
   @media (hover: hover) {
-    .hover\:bg-red-500:hover {
-      background-color: var(--color-red-500);
-    }
-  }
-  @media (hover: hover) {
     .hover\:bg-yellow-500:hover {
       background-color: var(--color-yellow-500);
     }
@@ -1135,12 +1131,6 @@
   }
   .focus\:bg-gray-100:focus {
     background-color: var(--color-gray-100);
-  }
-  .focus\:bg-red-500:focus {
-    background-color: var(--color-red-500);
-  }
-  .focus\:text-red-400:focus {
-    color: var(--color-red-400);
   }
   .focus\:ring-2:focus {
     --tw-ring-shadow: var(--tw-ring-inset,) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color, currentcolor);
@@ -1454,6 +1444,11 @@
   @media (width >= 48rem) {
     .md\:justify-between {
       justify-content: space-between;
+    }
+  }
+  @media (width >= 48rem) {
+    .md\:justify-center {
+      justify-content: center;
     }
   }
   @media (width >= 48rem) {

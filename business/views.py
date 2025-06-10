@@ -39,6 +39,6 @@ def create(request):
 
 class InfoTableList(PermissionRequiredMixin, ListView):
     permission_required = ('customauth.can_create_listing')
-    paginate_by = 1
+    paginate_by = 10
     model = Listing
     template_name = 'htmx-partials/data-table.html'
