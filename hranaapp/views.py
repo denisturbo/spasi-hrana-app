@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from business.models import Listing
+from listings.models import Listing
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from customauth.models import BaseSpasiHranaUser, BusinessUser, CustomerUser

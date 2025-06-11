@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import ListingCreation
 from django.contrib.auth.decorators import permission_required
-from business.models import Listing
+from listings.models import Listing
 from django.views.generic import ListView
 from django.contrib.auth.mixins import PermissionRequiredMixin
 
@@ -39,6 +39,6 @@ def create(request):
 
 class InfoTableList(PermissionRequiredMixin, ListView):
     permission_required = ('customauth.can_create_listing')
-    paginate_by = 10
+    paginate_by = 1
     model = Listing
     template_name = 'htmx-partials/data-table.html'

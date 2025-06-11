@@ -7,7 +7,9 @@
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
+    --color-red-400: #F87171;
     --color-red-600: #DC2626;
+    --color-red-900: #7F1D1D;
     --color-orange-300: #F6AD55;
     --color-orange-400: #ED8936;
     --color-orange-500: #DD6B20;
@@ -24,6 +26,8 @@
     --color-green-900: #064E3B;
     --color-cyan-900: #164E63;
     --color-blue-100: #DBEAFE;
+    --color-blue-200: #BFDBFE;
+    --color-blue-400: #60A5FA;
     --color-blue-500: #3B82F6;
     --color-blue-600: #2563EB;
     --color-blue-900: #1E3A8A;
@@ -618,10 +622,10 @@
   .gap-x-10 {
     column-gap: calc(var(--spacing) * 10);
   }
-  :where(.-space-x-px > :not(:last-child)) {
+  :where(.space-x-1 > :not(:last-child)) {
     --tw-space-x-reverse: 0;
-    margin-inline-start: calc(-1px * var(--tw-space-x-reverse));
-    margin-inline-end: calc(-1px * calc(1 - var(--tw-space-x-reverse)));
+    margin-inline-start: calc(calc(var(--spacing) * 1) * var(--tw-space-x-reverse));
+    margin-inline-end: calc(calc(var(--spacing) * 1) * calc(1 - var(--tw-space-x-reverse)));
   }
   :where(.space-x-4 > :not(:last-child)) {
     --tw-space-x-reverse: 0;
@@ -732,8 +736,20 @@
   .border-gray-900 {
     border-color: var(--color-gray-900);
   }
+  .border-red-900 {
+    border-color: var(--color-red-900);
+  }
   .bg-blue-100 {
     background-color: var(--color-blue-100);
+  }
+  .bg-blue-200 {
+    background-color: var(--color-blue-200);
+  }
+  .bg-blue-400 {
+    background-color: var(--color-blue-400);
+  }
+  .bg-blue-900 {
+    background-color: var(--color-blue-900);
   }
   .bg-cyan-900 {
     background-color: var(--color-cyan-900);
@@ -753,6 +769,9 @@
   .bg-gray-800 {
     background-color: var(--color-gray-800);
   }
+  .bg-gray-900 {
+    background-color: var(--color-gray-900);
+  }
   .bg-green-100 {
     background-color: var(--color-green-100);
   }
@@ -761,6 +780,9 @@
   }
   .bg-orange-600 {
     background-color: var(--color-orange-600);
+  }
+  .bg-red-900 {
+    background-color: var(--color-red-900);
   }
   .bg-white {
     background-color: var(--color-white);
@@ -960,6 +982,9 @@
   .whitespace-nowrap {
     white-space: nowrap;
   }
+  .text-blue-400 {
+    color: var(--color-blue-400);
+  }
   .text-blue-600 {
     color: var(--color-blue-600);
   }
@@ -996,8 +1021,14 @@
   .text-orange-600 {
     color: var(--color-orange-600);
   }
+  .text-red-400 {
+    color: var(--color-red-400);
+  }
   .text-red-600 {
     color: var(--color-red-600);
+  }
+  .text-transparent {
+    color: transparent;
   }
   .text-white {
     color: var(--color-white);
@@ -1054,6 +1085,10 @@
   .ease-in {
     --tw-ease: var(--ease-in);
     transition-timing-function: var(--ease-in);
+  }
+  .select-none {
+    -webkit-user-select: none;
+    user-select: none;
   }
   @media (hover: hover) {
     .group-hover\:text-gray-900:is(:where(.group):hover *) {
@@ -1377,11 +1412,6 @@
     }
   }
   @media (width >= 48rem) {
-    .md\:mb-0 {
-      margin-bottom: calc(var(--spacing) * 0);
-    }
-  }
-  @media (width >= 48rem) {
     .md\:mb-6 {
       margin-bottom: calc(var(--spacing) * 6);
     }
@@ -1696,9 +1726,6 @@
     .\32 xl\:px-0 {
       padding-inline: calc(var(--spacing) * 0);
     }
-  }
-  :where(.rtl\:space-x-reverse:where(:dir(rtl), [dir="rtl"], [dir="rtl"] *) > :not(:last-child)) {
-    --tw-space-x-reverse: 1;
   }
   .rtl\:text-right:where(:dir(rtl), [dir="rtl"], [dir="rtl"] *) {
     text-align: right;

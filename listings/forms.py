@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 from django.forms.widgets import TextInput, NumberInput, Textarea, FileInput
-from business.models import Listing
+from listings.models import Listing
 
 
 class ListingCreation(ModelForm):
