@@ -3,7 +3,7 @@ from django.forms import CharField, EmailField, ChoiceField
 from django.forms.widgets import TelInput, PasswordInput, RadioSelect, TextInput, EmailInput
 from customauth.models import BusinessUser, BaseSpasiHranaUser, CustomerUser
 
-class CustomLoginForm(AuthenticationForm): #Business
+class CustomLoginForm(AuthenticationForm):
     username = EmailField(
         label=("Потребителско име"),
         widget=EmailInput(attrs={"autocomplete": "email", "placeholder": "Твоят email", "class": "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5", "autofocus": True})
@@ -72,7 +72,8 @@ class CustomerSignupForm(CustomBaseSignupForm):
             CustomerUser.objects.create(
                 user=user,
                 first_name=self.cleaned_data['first_name'],
-                last_name=self.cleaned_data['last_name'],            )
+                last_name=self.cleaned_data['last_name'],
+                                      )
         return user
 
 
@@ -100,7 +101,7 @@ max_length=50, widget=TextInput(attrs={"placeholder": "ул. Лилия 1", "cla
     def save(self, commit=True):
         user = super().save(commit=False)
         user.user_type = 'business'
-        user.is_active = False # False - requires manual activation, safety reasons -- Може да бъде пуснато на True за тестове..
+        user.is_active = True # False - requires manual activation, safety reasons -- Може да бъде пуснато на True за тестове..
         if commit:
             user.save()
             BusinessUser.objects.create(
