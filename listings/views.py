@@ -2,7 +2,9 @@ from django.shortcuts import render, redirect
 from .forms import ListingCreation
 from django.contrib.auth.decorators import permission_required
 from listings.models import Listing
+from customauth.models import BusinessUser
 from django.views.generic import ListView
+from django.shortcuts import get_object_or_404
 from django.contrib.auth.mixins import PermissionRequiredMixin
 
 
@@ -42,3 +44,13 @@ class InfoTableList(PermissionRequiredMixin, ListView):
     paginate_by = 1
     model = Listing
     template_name = 'htmx-partials/data-table.html'
+
+    def get_queryset(self):
+        business = get_object_or_404(BusinessUser, user=self.request.user)
+        return Listing.objects.filter(connection=business)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        business = get_object_or_404(BusinessUser, user=self.request.user)
+        context['business'] = business
+        return context

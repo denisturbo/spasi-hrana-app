@@ -6,11 +6,19 @@
   data-dropdown-toggle="dropdown"
 >
   <span class="sr-only">Open user menu</span>
+  {% if business.profile_picture%}
   <img
     class="w-8 h-8 rounded-full"
     src="{{business.profile_picture.url}}"
     alt="user photo"
   />
+  {%else%}
+    <img
+    class="w-8 h-8 rounded-full"
+    src="{{'#'}}"
+    alt="user photo"
+  />
+  {%endif%}
 </button>
 <!-- Dropdown menu -->
 <div

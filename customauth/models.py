@@ -67,7 +67,7 @@ class BusinessUser(models.Model):
     user = models.OneToOneField(BaseSpasiHranaUser, on_delete=models.CASCADE)
     business_name = models.CharField(max_length=50)
     location = models.CharField(max_length=50)
-    profile_picture = models.ImageField(upload_to='pfps')
+    profile_picture = models.ImageField(upload_to='pfps', null=True, blank=True)
     business_type = models.CharField(max_length=10, choices=BUSINESS_TYPE_CHOICES)
 
     def __str__(self):

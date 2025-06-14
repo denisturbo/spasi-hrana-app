@@ -2,6 +2,7 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.forms import CharField, EmailField, ChoiceField
 from django.forms.widgets import TelInput, PasswordInput, RadioSelect, TextInput, EmailInput
 from customauth.models import BusinessUser, BaseSpasiHranaUser, CustomerUser
+from django.contrib.auth.models import Group
 
 class CustomLoginForm(AuthenticationForm):
     username = EmailField(
@@ -74,6 +75,8 @@ class CustomerSignupForm(CustomBaseSignupForm):
                 first_name=self.cleaned_data['first_name'],
                 last_name=self.cleaned_data['last_name'],
                                       )
+            group = Group.objects.get(name='Customer')
+            user.groups.add(group)
         return user
 
 
@@ -111,6 +114,8 @@ max_length=50, widget=TextInput(attrs={"placeholder": "ул. Лилия 1", "cla
                 business_type=self.cleaned_data['business_type'],
 
             )
+            group = Group.objects.get(name='Business')
+            user.groups.add(group)
         return user
     
 
