@@ -1,5 +1,5 @@
 {%extends 'base.html'%}
-{%block head_title%} {{ block.super }} | Начална страница {%endblock %}
+{%block head_title%} {{ block.super }} {%block title%}| Начална страница {%endblock %}{%endblock %}
 {%block template%}
 {%include 'components/business/navbar.html'%}
 {%include 'components/business/sidenav.html'%}
