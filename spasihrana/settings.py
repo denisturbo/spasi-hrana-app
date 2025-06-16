@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'listings',
     'tailwind',
     'theme',
-    'customauth'
+    'customauth',
+    'promocodes'
 ]
 
 TAILWIND_APP_NAME = 'theme'
