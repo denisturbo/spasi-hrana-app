@@ -12,5 +12,5 @@ class Promocode(models.Model):
 
     def discounted_price(self) -> Decimal:
         original_price = self.listing.price
-        discount = Decimal('original_price') * (Decimal('self.percentage_off') / 100)
-        return original_price - discount 
+        discount = original_price * (Decimal(self.percentage_off) / Decimal(100))
+        return round((original_price - discount),2)
