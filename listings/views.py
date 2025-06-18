@@ -26,7 +26,7 @@ def create(request):
     else:
         form = ListingCreation()
 
-    return render(request, "business/create.html", {"form": form})
+    return render(request, "business/offers/create.html", {"form": form})
 
 
 # @permission_required('customauth.can_create_listing', raise_exception=True) 
@@ -43,7 +43,7 @@ class InfoTableList(PermissionRequiredMixin, ListView):
     permission_required = ('customauth.can_create_listing')
     paginate_by = 1
     model = Listing
-    template_name = 'htmx-partials/data-table.html'
+    template_name = 'business/offers/data-table.html'
 
     def get_queryset(self):
         business = get_object_or_404(BusinessUser, user=self.request.user)
