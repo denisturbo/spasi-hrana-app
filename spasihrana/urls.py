@@ -25,12 +25,13 @@ urlpatterns = [
     path('faq/', faq, name='faq'),
     path('404/', baba, name='baba'),
     path('auth/', include("customauth.urls")),
-    path('', include('listings.urls')),
+    path('', include(('listings.urls', 'listings'), namespace='listing')),
+    path('', include(('promocodes.urls', 'promocodes'), namespace='promocodes')),
     path('listing/<int:pk>/', ListingDetailView.as_view(), name='listingDetail'),
-    path('listings/', ListingView.as_view(), name='listings' ),
+    path('listings/', ListingView.as_view(), name='listingList' ),
     path('business/', business, name='business'),
     path('profile/', profile, name='profile'),
-
+    
 ]
 
 

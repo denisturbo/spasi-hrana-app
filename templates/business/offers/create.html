@@ -6,7 +6,7 @@
 <section class=" flex items-center justify-center">
   <div class="w-full max-w-2xl p-6 bg-white">
       <h2 class="mb-4 text-xl font-bold text-gray-900 ">Добави продукт</h2>
-        <form method='POST' enctype="multipart/form-data" action="{% url 'listingcreation' %}">
+        <form method='POST' enctype="multipart/form-data" action="{% url 'listings:create' %}">
             {%csrf_token%}
           <div class="grid gap-4 mb-4 sm:grid-cols-2 sm:gap-6 sm:mb-5">
               <div class="sm:col-span-2"> 
