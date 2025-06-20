@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from promocodes.forms import PromocodeCreation
 from promocodes.models import Promocode
 from customauth.models import BusinessUser
-from listings.models import Listing
 from django.views.generic import ListView
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.shortcuts import get_object_or_404
