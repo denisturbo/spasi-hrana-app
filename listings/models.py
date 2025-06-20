@@ -1,11 +1,10 @@
 from django.db import models
 from django.core.validators import MinValueValidator
 from decimal import Decimal
-from customauth.models import BusinessUser
 # Create your models here.
 
 class Listing(models.Model):
-    connection = models.ForeignKey(BusinessUser, on_delete=models.CASCADE)
+    connection = models.ForeignKey('customauth.BusinessUser', on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     description = models.TextField()
     image = models.ImageField(upload_to='listing_thumbs')
