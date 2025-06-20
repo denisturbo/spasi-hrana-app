@@ -1,12 +1,12 @@
 
 from django.urls import path
-# from .views import create_promocode, InfoTableList
+from .views import create,InfoTableList
 
 app_name = 'promocodes'
 
 urlpatterns = [
-    # path('create-promocode/', create_promocode, name='create'),
-    # path('infotable/', InfoTableList.as_view(), name='infotable')
+    path('create-promocode/', create, name='create'),
+    path('promocode-infotable/', InfoTableList.as_view(), name='infotable')
 
 ]
 

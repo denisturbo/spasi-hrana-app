@@ -17,3 +17,5 @@ class Listing(models.Model):
         return round(self.price / Decimal("1.95"), 2)
     
 
+    def __str__(self):
+        return self.title

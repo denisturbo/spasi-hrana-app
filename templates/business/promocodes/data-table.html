@@ -11,13 +11,13 @@
                     ID
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Заглавие
+                    Име на продукта
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Цена (лв)
+                    Промокод
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Цена (Евро)
+                    Процент отстъпка
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Action
@@ -25,19 +25,19 @@
             </tr>
         </thead>
         <tbody>
-            {%for listing in object_list%}
+            {%for promocode in object_list%}
             <tr class="bg-white border-b  border-gray-200 hover:bg-gray-50 ">
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                    {{listing.pk}}
+                    {{promocode.pk}}
                 </th>
                 <td class="px-6 py-4">
-                    {{listing.title}}
+                    {{promocode.listing}}
                 </td>
                 <td class="px-6 py-4">
-                    {{listing.price}} лв.
+                    {{promocode.code}}
                 </td>
                 <td class="px-6 py-4">
-                    {{listing.eur_price}} евро
+                    {{promocode.percentage_off}} %
                 </td>
                 <td class="px-6 py-4">
                     <a href="#" class="font-medium text-blue-600  hover:underline">Edit</a>

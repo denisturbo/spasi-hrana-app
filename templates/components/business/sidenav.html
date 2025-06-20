@@ -39,10 +39,10 @@
               </button>
               <ul id="dropdown-pages-2" class="hidden py-2 space-y-2">
                   <li>
-                      <a hx-get="#" hx-target="#mainArea" hx-swap="innerHTML" class="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100">Добави промокод</a>
+                      <a hx-get="{%url 'promocodes:create'%}" hx-target="#mainArea" hx-swap="innerHTML" class="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100">Добави промокод</a>
                   </li>
                   <li>
-                      <a hx-get="#" hx-target="#mainArea" hx-swap="innerHTML" class="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100">Всички промокодове</a>
+                      <a hx-get="{%url 'promocodes:infotable'%}" hx-target="#mainArea" hx-swap="innerHTML" class="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100">Всички промокодове</a>
                   </li>
               </ul>
           </li>
