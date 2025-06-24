@@ -34,14 +34,9 @@ def business(request):
 
 def profile(request): # Profile View for both types.. Business & Customer. Renders different based on Role
     current_user = request.user
-    business = None
-    all_listings = None
-    customer = None
     print(request.user.user_type)
     customer = CustomerUser.objects.get(user=current_user)
     return render(request, 'profile/profile.html', {'current_user': current_user,
-                                                    'business': business,
-                                                    "all_listings": all_listings,
                                                     "customer": customer})
 
 
