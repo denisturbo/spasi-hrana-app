@@ -8,8 +8,45 @@
       <h2 class="mb-4 text-xl font-bold text-gray-900 ">Добави промокод</h2>
         <form method='POST' enctype="multipart/form-data" action="{% url 'promocodes:create' %}">
             {%csrf_token%}
-            {{form}}
+                    <div class="grid gap-6 mb-6">
+            <label for="{{form.listing.id_for_label}}" class="block text-sm font-medium text-gray-900">Продукт</label>
 
+            <button id="dropdownHelperButton" data-dropdown-toggle="dropdownHelper" class="w-full text-white bg-orange-600 hover:bg-orange-700  focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center" type="button">Избери продукт
+               <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"></path>
+            </svg>
+            </button>
+            <div id="dropdownHelper" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-60 ">
+                <ul class="p-3 space-y-1 text-sm text-gray-700 " aria-labelledby="dropdownRadioBgHoverButton">
+                    {%for radio in form.listing%}
+                        <li>
+                            <div class="flex p-2 rounded-sm hover:bg-gray-100">
+                                <div class="flex items-center h-5">
+                                {{ radio.tag }}
+                                </div>
+                                <div class="ms-2 text-sm">
+                                    <label for="{{ radio.id_for_label }}" class="font-medium text-gray-900 ">
+                                        <div>{{ radio.choice_label }}</div>
+                                    </label>
+                                </div>
+                            </div>
+                        </li>
+                    {%endfor%}
+                </ul>
+            </div>
+            </div>
+            <div class="grid gap-6 mb-6">
+         <div>
+            <label for="{{form.percentage_off.id_for_label}}" class="block mb-2 text-sm font-medium text-gray-900">Проценти намаление</label>
+            {{form.percentage_off}}
+        </div>
+      </div>
+      <div class="grid gap-6 mb-6">
+         <div>
+            <label for="{{form.code.id_for_label}}" class="block mb-2 text-sm font-medium text-gray-900">Промокод</label>
+            {{form.code}}
+        </div>
+            <div>
           <div class="flex items-center space-x-4">
             <input class="text-white bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="submit" value="Добави">
             <input type="hidden" name="next" value="{{ next }}">   
