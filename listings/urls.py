@@ -1,11 +1,11 @@
 
 from django.urls import path
-from .views import create, InfoTableList
+from .views import CreateListing, InfoTableList
 
 app_name = "listings"
 
 urlpatterns = [
-    path('create-listing/', create, name='create'),
+    path('create-listing/', CreateListing.as_view(), name='create'),
     path('infotable/', InfoTableList.as_view(), name='infotable')
 
 ]

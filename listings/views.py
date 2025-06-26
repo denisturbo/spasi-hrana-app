@@ -3,31 +3,43 @@ from .forms import ListingCreation
 from django.contrib.auth.decorators import permission_required
 from listings.models import Listing
 from customauth.models import BusinessUser
-from django.views.generic import ListView
+from django.views.generic import ListView, CreateView
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.mixins import PermissionRequiredMixin
-
+from django.urls import reverse_lazy
 
 # Create your views here.
 
 
 
 
-@permission_required('customauth.can_create_listing', raise_exception=True) 
-def create(request):
-    if request.method == "POST":
-        
-        form = ListingCreation(request.POST, request.FILES)
-        if form.is_valid(): 
-            new_list = form.save(commit=False)
-            new_list.connection = request.user.businessuser # connection e vruzkata mejdu Listinga i modela za user
-            new_list.save()
-            return redirect('/')
-    else:
-        form = ListingCreation()
+# @permission_required('customauth.can_create_listing', raise_exception=True)
+# def create(request):
+#     if request.method == "POST":
+#
+#         form = ListingCreation(request.POST, request.FILES)
+#         if form.is_valid():
+#             new_list = form.save(commit=False)
+#             new_list.connection = request.user.businessuser # connection e vruzkata mejdu Listinga i modela za user
+#             new_list.save()
+#             return redirect('/')
+#     else:
+#         form = ListingCreation()
+#
+#     return render(request, "business/offers/create.html", {"form": form})
 
-    return render(request, "business/offers/create.html", {"form": form})
+class CreateListing(PermissionRequiredMixin, CreateView):
+    permission_required = ('customauth.can_create_listing')
+    model = Listing
+    template_name = 'business/offers/create.html'
+    form_class = ListingCreation
+    success_url = reverse_lazy('index')
 
+    def form_valid(self, form):
+        new_list = form.save(commit=False)
+        new_list.connection = self.request.user.businessuser
+        new_list.save()
+        return super().form_valid(form)
 
 # @permission_required('customauth.can_create_listing', raise_exception=True) 
 # def infotable(request):
