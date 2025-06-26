@@ -30,6 +30,7 @@ class CreatePromocode(CreateView):
     form_class = PromocodeCreation
     success_url = reverse_lazy('index')
 
+
     def form_valid(self, form):
         new_list = form.save(commit=False)
         new_list.connection = self.request.user.businessuser
