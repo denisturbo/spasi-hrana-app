@@ -1,7 +1,6 @@
 
 from django.urls import path
 from .views import CreatePromocode,InfoTableList
-
 app_name = 'promocodes'
 
 urlpatterns = [

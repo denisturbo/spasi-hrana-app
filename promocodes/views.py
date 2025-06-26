@@ -24,8 +24,7 @@ from django.urls import reverse_lazy
 #     return render(request, "business/promocodes/create.html", {"form": form})
 
 
-class CreatePromocode(PermissionRequiredMixin, CreateView):
-    permission_required = ('customauth.can_create_listing')
+class CreatePromocode(CreateView):
     model = Promocode
     template_name = 'business/promocodes/create.html'
     form_class = PromocodeCreation
