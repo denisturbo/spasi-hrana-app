@@ -2,26 +2,12 @@ from django.shortcuts import render, redirect
 from promocodes.forms import PromocodeCreation
 from promocodes.models import Promocode
 from customauth.models import BusinessUser
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, DeleteView
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 
 # Create your views here.
-
-# def create(request):
-#     if request.method == "POST":
-#         form = PromocodeCreation(request.POST)
-#         if form.is_valid():
-#             new_promo = form.save(commit=False)
-#             new_promo.connection = request.user.businessuser
-#             new_promo.save()
-#             return redirect('/')
-#     else:
-#         form = PromocodeCreation()
-#
-#
-#     return render(request, "business/promocodes/create.html", {"form": form})
 
 
 class CreatePromocode(CreateView):
@@ -36,11 +22,16 @@ class CreatePromocode(CreateView):
         new_list.save()
         return super().form_valid(form)
 
+class DeletePromocode(PermissionRequiredMixin, DeleteView):
+    permission_required = ('customauth.can_create_listing')
+    model = Promocode
+    success_url = reverse_lazy('index')
+
 
 
 class InfoTableList(PermissionRequiredMixin, ListView):
     permission_required = ('customauth.can_create_listing')
-    paginate_by = 1
+    paginate_by = 10
     model = Promocode
     template_name = 'business/promocodes/data-table.html'
 
