@@ -3,30 +3,13 @@ from .forms import ListingCreation
 from django.contrib.auth.decorators import permission_required
 from listings.models import Listing
 from customauth.models import BusinessUser
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, DeleteView
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.urls import reverse_lazy
 
 # Create your views here.
 
-
-
-
-# @permission_required('customauth.can_create_listing', raise_exception=True)
-# def create(request):
-#     if request.method == "POST":
-#
-#         form = ListingCreation(request.POST, request.FILES)
-#         if form.is_valid():
-#             new_list = form.save(commit=False)
-#             new_list.connection = request.user.businessuser # connection e vruzkata mejdu Listinga i modela za user
-#             new_list.save()
-#             return redirect('/')
-#     else:
-#         form = ListingCreation()
-#
-#     return render(request, "business/offers/create.html", {"form": form})
 
 class CreateListing(PermissionRequiredMixin, CreateView):
     permission_required = ('customauth.can_create_listing')
@@ -41,15 +24,10 @@ class CreateListing(PermissionRequiredMixin, CreateView):
         new_list.save()
         return super().form_valid(form)
 
-# @permission_required('customauth.can_create_listing', raise_exception=True) 
-# def infotable(request):
-#     business = BusinessUser.objects.get(user=request.user) # business related stuff
-#     listings = Listing.objects.filter(connection=business) # shows all listings of logged business
-#     return render(request, 'htmx-partials/data-table.html', {
-#                                                     'business': business,
-#                                                     "listings": listings,
-#                                                     })
-
+class DeleteListing(PermissionRequiredMixin, DeleteView):
+    permission_required = ('customauth.can_create_listing')
+    model = Listing
+    success_url = reverse_lazy('index')
 
 class InfoTableList(PermissionRequiredMixin, ListView):
     permission_required = ('customauth.can_create_listing')
