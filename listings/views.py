@@ -24,10 +24,18 @@ class CreateListing(PermissionRequiredMixin, CreateView):
         new_list.save()
         return super().form_valid(form)
 
-class DeleteListing(PermissionRequiredMixin, DeleteView):
-    permission_required = ('customauth.can_create_listing')
-    model = Listing
-    success_url = reverse_lazy('index')
+# class DeleteListing(PermissionRequiredMixin, DeleteView):
+#     permission_required = ('customauth.can_create_listing')
+#     model = Listing
+#     success_url = reverse_lazy('listings:infotable')
+
+
+def delete_list(request, pk):
+    listing = get_object_or_404(Listing, pk=pk, connection=request.user.businessuser)
+    listing.delete()
+    listing_list = Listing.objects.filter(connection=request.user.businessuser)
+
+    return render(request, 'htmx-partials/listing_table_partial.html', {"object_list": listing_list})
 
 class InfoTableList(PermissionRequiredMixin, ListView):
     permission_required = ('customauth.can_create_listing')
