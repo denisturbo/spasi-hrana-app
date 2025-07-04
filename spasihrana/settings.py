@@ -29,7 +29,18 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
+THIRD_PARTY_APPS = [
+    'tailwind',
+    'theme',
+    'django_htmx'
+]
 
+PROJECT_APPS = [
+    'hranaapp',
+    'listings',
+    'customauth',
+    'promocodes'
+]
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -37,13 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'hranaapp',
-    'listings',
-    'tailwind',
-    'theme',
-    'customauth',
-    'promocodes'
-]
+] + THIRD_PARTY_APPS + PROJECT_APPS
 
 TAILWIND_APP_NAME = 'theme'
 
@@ -56,6 +61,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django_htmx.middleware.HtmxMiddleware",
 ]
 
 if DEBUG:

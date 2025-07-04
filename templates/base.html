@@ -1,4 +1,5 @@
 {% load static tailwind_tags %}
+{% load django_htmx %}
 
 <!DOCTYPE html>
 <html lang="bg" class="smooth-scroll h-full bg-white">
@@ -8,9 +9,11 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge">
 		{% tailwind_css %}
+         {% htmx_script %}
+
 	</head>
 
-	<body class="flex flex-col min-h-svh bg-gray-50">
+	<body hx-headers='{"x-csrftoken": "{{ csrf_token }}"}' class="flex flex-col min-h-svh bg-gray-50">
 		{%block template%}
 		{% include 'components/header.html'%}
 			<main class="grow">
@@ -21,7 +24,6 @@
 		{% include 'components/footer.html'%}
 		{%endblock template%}
 		<script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
-		<script src="https://unpkg.com/htmx.org@2.0.4" integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+" crossorigin="anonymous"></script>
 		<script src="{% static 'js/after-swap-init.js' %}"></script>
 	</body>
 </html>
