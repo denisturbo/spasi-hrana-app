@@ -16,14 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from hranaapp.views import index, faq, baba, ListingDetailView, ListingView, business, profile
+from hranaapp.views import index, faq, ListingDetailView, ListingView, business, profile
 from django.conf import settings
 from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),
     path('faq/', faq, name='faq'),
-    path('404/', baba, name='baba'),
     path('auth/', include("customauth.urls")),
     path('', include('listings.urls')),
     path('', include('promocodes.urls')),

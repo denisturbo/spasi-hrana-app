@@ -25,9 +25,6 @@ def index(request):
 def faq(request):
     return render(request, 'landing/faq.html')
 
-def baba(request):
-    return render(request, 'errors/404.html')
-
 def business(request):
     return render(request, 'landing/business.html')    
 
