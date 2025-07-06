@@ -31,7 +31,9 @@
                     {{promocode.pk}}
                 </th>
                 <td class="px-6 py-4">
-                    {{promocode.listing}}
+                    {% for name in promocode.listing.all %}
+                        | {{ name }} |
+                        {% endfor %}
                 </td>
                 <td class="px-6 py-4">
                     {{promocode.code}}
@@ -53,7 +55,7 @@
                         <a href="#" class="block px-4 py-2 hover:bg-gray-100">Промени</a>
                       </li>
                         <li>
-                            <form method="POST" action="{% url 'promocodes:delete' promocode.pk %}">
+                            <form action="{% url 'promocodes:delete' promocode.pk %}" method="post">
                                 {% csrf_token %}
                                 <button class="block px-4 py-2 hover:bg-gray-100">Изтрий</button>
                             </form>
@@ -65,6 +67,6 @@
             {%endfor%}
         </tbody>
     </table>
-{% include 'htmx-partials/paginator.html' %}
+{% include 'htmx-partials/paginator-promo.html' %}
 </section>
 {%endblock%}

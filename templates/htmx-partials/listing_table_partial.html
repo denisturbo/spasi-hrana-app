@@ -26,9 +26,9 @@
                         <a href="#" class="block px-4 py-2 hover:bg-gray-100">Промени</a>
                       </li>
                         <li>
-                            <form method="POST">
+<form action="{% url 'listings:delete' listing.pk %}" method="post">
                                 {% csrf_token %}
-                                <a href="{% url 'listings:delete' listing.pk %}" class="block px-4 py-2 hover:bg-gray-100">Изтрий</a>
+                                <button class="block px-4 py-2 hover:bg-gray-100">Изтрий</button>
                             </form>
                       </li>
                     </ul>

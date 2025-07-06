@@ -13,6 +13,7 @@
     --color-orange-500: #DD6B20;
     --color-orange-600: #C05621;
     --color-orange-700: #9C4221;
+    --color-orange-800: #7B341E;
     --color-yellow-300: #FCD34D;
     --color-yellow-500: #F59E0B;
     --color-yellow-600: #D97706;
@@ -402,9 +403,6 @@
   .inline-flex {
     display: inline-flex;
   }
-  .table {
-    display: table;
-  }
   .size-6 {
     width: calc(var(--spacing) * 6);
     height: calc(var(--spacing) * 6);
@@ -492,6 +490,9 @@
   }
   .w-44 {
     width: calc(var(--spacing) * 44);
+  }
+  .w-48 {
+    width: calc(var(--spacing) * 48);
   }
   .w-56 {
     width: calc(var(--spacing) * 56);
@@ -900,6 +901,9 @@
   .bg-orange-600 {
     background-color: var(--color-orange-600);
   }
+  .bg-orange-700 {
+    background-color: var(--color-orange-700);
+  }
   .bg-white {
     background-color: var(--color-white);
   }
@@ -1247,6 +1251,11 @@
   @media (hover: hover) {
     .hover\:bg-orange-700:hover {
       background-color: var(--color-orange-700);
+    }
+  }
+  @media (hover: hover) {
+    .hover\:bg-orange-800:hover {
+      background-color: var(--color-orange-800);
     }
   }
   @media (hover: hover) {
@@ -1897,8 +1906,14 @@
   .dark\:bg-green-900:where(.dark, .dark *) {
     background-color: var(--color-green-900);
   }
+  .dark\:bg-orange-600:where(.dark, .dark *) {
+    background-color: var(--color-orange-600);
+  }
   .dark\:text-gray-200:where(.dark, .dark *) {
     color: var(--color-gray-200);
+  }
+  .dark\:text-gray-300:where(.dark, .dark *) {
+    color: var(--color-gray-300);
   }
   .dark\:text-gray-400:where(.dark, .dark *) {
     color: var(--color-gray-400);
@@ -1936,6 +1951,11 @@
     }
   }
   @media (hover: hover) {
+    .dark\:hover\:bg-orange-700:where(.dark, .dark *):hover {
+      background-color: var(--color-orange-700);
+    }
+  }
+  @media (hover: hover) {
     .dark\:hover\:text-white:where(.dark, .dark *):hover {
       color: var(--color-white);
     }
@@ -1954,6 +1974,9 @@
   }
   .dark\:focus\:ring-gray-800:where(.dark, .dark *):focus {
     --tw-ring-color: var(--color-gray-800);
+  }
+  .dark\:focus\:ring-orange-800:where(.dark, .dark *):focus {
+    --tw-ring-color: var(--color-orange-800);
   }
 }
 @layer base {
