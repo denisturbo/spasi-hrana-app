@@ -2,6 +2,10 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from customauth.managers import UserManager
 from django.core.validators import RegexValidator
+
+from hranaapp.mixins import CreatedUpdatedAtMixin
+
+
 # Create your models here.
 
 class BaseSpasiHranaUser(PermissionsMixin, AbstractBaseUser):
@@ -40,7 +44,7 @@ class BaseSpasiHranaUser(PermissionsMixin, AbstractBaseUser):
 
 
 
-class BusinessUser(models.Model):
+class BusinessUser(CreatedUpdatedAtMixin):
     BUSINESS_TYPE_CHOICES = [
         ('sushi', 'Sushi'),
         ('coffee', 'Coffee'),
@@ -67,7 +71,7 @@ class BusinessUser(models.Model):
             ("can_read_listing", "Can Read Listing"),
         )
 
-class CustomerUser(models.Model):
+class CustomerUser(CreatedUpdatedAtMixin):
     user = models.OneToOneField(BaseSpasiHranaUser, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)

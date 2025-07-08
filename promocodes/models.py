@@ -4,9 +4,12 @@ from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from decimal import Decimal
 
+from hranaapp.mixins import CreatedUpdatedAtMixin
+
+
 # Create your models here.
 
-class Promocode(models.Model):
+class Promocode(CreatedUpdatedAtMixin):
     connection = models.ForeignKey('customauth.BusinessUser', on_delete=models.CASCADE)
     listing = models.ManyToManyField('listings.Listing')
     percentage_off = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(100)])
@@ -15,6 +18,7 @@ class Promocode(models.Model):
     def discounted_price(self) -> dict[Any, Any]:
         discounted = {}
         for item in self.listing.all():
+            print(item)
             original_price = item.price
             discount = original_price * (Decimal(self.percentage_off) / Decimal(100))
             discounted[item.id] = round((original_price - discount),2)

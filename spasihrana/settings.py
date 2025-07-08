@@ -39,7 +39,8 @@ PROJECT_APPS = [
     'hranaapp',
     'listings',
     'customauth',
-    'promocodes'
+    'promocodes',
+    'orders',
 ]
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -126,7 +127,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Sofia'
 
 USE_I18N = True
 
