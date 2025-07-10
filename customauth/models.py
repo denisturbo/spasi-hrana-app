@@ -44,7 +44,7 @@ class BaseSpasiHranaUser(PermissionsMixin, AbstractBaseUser):
 
 
 
-class BusinessUser(CreatedUpdatedAtMixin):
+class BusinessUser(CreatedUpdatedAtMixin, models.Model):
     BUSINESS_TYPE_CHOICES = [
         ('sushi', 'Sushi'),
         ('coffee', 'Coffee'),
@@ -71,7 +71,7 @@ class BusinessUser(CreatedUpdatedAtMixin):
             ("can_read_listing", "Can Read Listing"),
         )
 
-class CustomerUser(CreatedUpdatedAtMixin):
+class CustomerUser(CreatedUpdatedAtMixin, models.Model):
     user = models.OneToOneField(BaseSpasiHranaUser, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)

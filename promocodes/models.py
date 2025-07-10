@@ -9,7 +9,7 @@ from hranaapp.mixins import CreatedUpdatedAtMixin
 
 # Create your models here.
 
-class Promocode(CreatedUpdatedAtMixin):
+class Promocode(CreatedUpdatedAtMixin, models.Model):
     connection = models.ForeignKey('customauth.BusinessUser', on_delete=models.CASCADE)
     listing = models.ManyToManyField('listings.Listing')
     percentage_off = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(100)])

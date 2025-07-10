@@ -1,21 +1,13 @@
-from django.utils.timezone import now
-
 from django.db import models
 from django.core.validators import MinValueValidator
 from decimal import Decimal
-
+from listings.choices import ListingStatus
 from hranaapp.mixins import CreatedUpdatedAtMixin
 
 
 # Create your models here.
 
-class Listing(CreatedUpdatedAtMixin):
-
-    class ListingStatus(models.TextChoices):
-        AVAILABLE = "available", "Available"
-        ORDERED = "ordered", "Ordered"
-        COMPLETED = "completed", "Completed"
-
+class Listing(CreatedUpdatedAtMixin, models.Model):
     connection = models.ForeignKey('customauth.BusinessUser', on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     description = models.TextField()
@@ -23,7 +15,6 @@ class Listing(CreatedUpdatedAtMixin):
     price = models.DecimalField(max_digits=6, decimal_places=2,
                                 validators=[MinValueValidator(0.01,
                                             message='Сумата трябва да е над 0.01')])
-
     status = models.CharField(max_length=20, choices=ListingStatus.choices, default=ListingStatus.AVAILABLE)
 
     @property

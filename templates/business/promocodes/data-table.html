@@ -63,7 +63,8 @@
                     </ul>
                 </div>
                 </td>
-            </tr>
+            </tr>{% empty %}
+                {% include 'components/partials/nothing-here.html' %}
             {%endfor%}
         </tbody>
     </table>
