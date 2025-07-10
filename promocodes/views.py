@@ -14,7 +14,7 @@ class CreatePromocode(CreateView):
     model = Promocode
     template_name = 'business/promocodes/create.html'
     form_class = PromocodeCreation
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('promocodes:create')
 
     def form_valid(self, form):
         new_list = form.save(commit=False)

@@ -1,37 +1,30 @@
-{%extends 'business/main.html'%}
+{% extends 'business/main.html' %}
 
-{%block title%} | Таблица {%endblock %}
-{%block content%}
-<div id="table-container">
+{% block title %} | Таблица {% endblock %}
+
+{% block content %}
+<main class="ml-64 mt-16 flex-1">
+  <div id="table-container" class="mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="bg-white shadow sm:rounded-lg p-6">
 <section id="section-table" class="relative overflow-x-auto shadow-md sm:rounded-lg">
-    <table id="default-table" class="w-full text-sm text-left rtl:text-right text-gray-500">
+      <table id="default-table" class="w-full text-sm text-left rtl:text-right text-gray-500">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50">
-            <tr>
-                <th scope="col" class="px-6 py-3">
-                    ID
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Заглавие
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Цена (лв)
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Цена (Евро)
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Статус
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Action
-                </th>
-            </tr>
+          <tr>
+            <th scope="col" class="px-6 py-3">ID</th>
+            <th scope="col" class="px-6 py-3">Заглавие</th>
+            <th scope="col" class="px-6 py-3">Цена (лв)</th>
+            <th scope="col" class="px-6 py-3">Цена (Евро)</th>
+            <th scope="col" class="px-6 py-3">Статус</th>
+            <th scope="col" class="px-6 py-3">Action</th>
+          </tr>
         </thead>
         <tbody id="listingtable" hx-target="this" hx-swap="outerHTML">
-            {% include 'htmx-partials/listing_table_partial.html' %}
+          {% include 'htmx-partials/listing_table_partial.html' %}
         </tbody>
-    </table>
-{% include 'htmx-partials/paginator-data.html' %}
-</section>
+      </table>
+      {% include 'htmx-partials/paginator-data.html' %}
+    </section>
+  </div>
 </div>
-{%endblock%}
+</main>
+{% endblock %}

@@ -2,7 +2,9 @@
 
 {%block title%} | Таблица {%endblock %}
 {%block content%}
-
+<main class="ml-64 mt-16 flex-1">
+  <div id="table-container" class="mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="bg-white shadow rounded-lg p-6">
 <section id="section-table" class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <table id="default-table" class="w-full text-sm text-left rtl:text-right text-gray-500">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50">
@@ -70,4 +72,7 @@
     </table>
 {% include 'htmx-partials/paginator-promo.html' %}
 </section>
+      </div>
+  </div>
+</main>
 {%endblock%}

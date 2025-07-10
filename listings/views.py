@@ -16,7 +16,7 @@ class CreateListing(PermissionRequiredMixin, CreateView):
     model = Listing
     template_name = 'business/offers/create.html'
     form_class = ListingCreation
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('listings:infotable')
 
     def form_valid(self, form):
         new_list = form.save(commit=False)
@@ -28,10 +28,6 @@ class DeleteListing(PermissionRequiredMixin, DeleteView):
     permission_required = ('customauth.can_create_listing')
     model = Listing
     success_url = reverse_lazy('listings:infotable')
-
-    def form_valid(self, form):
-        self.object = self.get_object()
-        return self.object.delete()
 
 
 def delete_list(request, pk):
