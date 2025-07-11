@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+from django.template.response import TemplateResponse
+
 from .forms import ListingCreation
 from django.contrib.auth.decorators import permission_required
 from listings.models import Listing
@@ -52,3 +54,13 @@ class InfoTableList(PermissionRequiredMixin, ListView):
         business = get_object_or_404(BusinessUser, user=self.request.user)
         context['business'] = business
         return context
+
+    def get(self, request, *args, **kwargs):
+        self.object_list = self.get_queryset()
+        context = self.get_context_data()
+
+        if request.headers.get('HX-Request'):
+            print('vliza')
+            return TemplateResponse(request, "htmx-partials/listing_table_partial.html", context)
+        else:
+            return TemplateResponse(request, self.template_name, context)

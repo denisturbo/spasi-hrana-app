@@ -29,7 +29,7 @@ def business(request):
     return render(request, 'landing/business.html')    
 
 
-def profile(request): # Profile View for both types.. Business & Customer. Renders different based on Role
+def profile(request):
     current_user = request.user
     print(request.user.user_type)
     customer = CustomerUser.objects.get(user=current_user)
@@ -37,7 +37,7 @@ def profile(request): # Profile View for both types.. Business & Customer. Rende
                                                     "customer": customer})
 
 
-class ListingView(LoginRequiredMixin, ListView):
+class ListingView(ListView):
     model = Listing
     template_name = 'customer/listings/listings.html'
     context_object_name = 'listings'
@@ -45,7 +45,7 @@ class ListingView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         return Listing.objects.all()
 
-class ListingDetailView(LoginRequiredMixin, DetailView):
+class ListingDetailView(DetailView):
     model = Listing
     template_name = 'customer/listings/listingdetail.html'
     context_object_name = 'listing_detail'

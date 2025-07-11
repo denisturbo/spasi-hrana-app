@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+from django.template.response import TemplateResponse
+
 from promocodes.forms import PromocodeCreation
 from promocodes.models import Promocode
 from customauth.models import BusinessUser
@@ -31,7 +33,7 @@ class DeletePromocode(PermissionRequiredMixin, DeleteView):
 
 class InfoTableList(PermissionRequiredMixin, ListView):
     permission_required = ('customauth.can_create_listing')
-    paginate_by = 10
+    paginate_by = 1
     model = Promocode
     template_name = 'business/promocodes/data-table.html'
 
@@ -44,3 +46,13 @@ class InfoTableList(PermissionRequiredMixin, ListView):
         business_user = get_object_or_404(BusinessUser, user=self.request.user)
         context['promocode'] = business_user
         return context
+
+    def get(self, request, *args, **kwargs):
+        self.object_list = self.get_queryset()
+        context = self.get_context_data()
+
+        if request.headers.get('HX-Request'):
+            print('vliza')
+            return TemplateResponse(request, "htmx-partials/promocode_table_partial.html", context)
+        else:
+            return TemplateResponse(request, self.template_name, context)
