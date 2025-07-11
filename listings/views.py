@@ -59,7 +59,7 @@ class InfoTableList(PermissionRequiredMixin, ListView):
         self.object_list = self.get_queryset()
         context = self.get_context_data()
 
-        if request.headers.get('HX-Request'):
+        if request.htmx:
             print('vliza')
             return TemplateResponse(request, "htmx-partials/listing_table_partial.html", context)
         else:
