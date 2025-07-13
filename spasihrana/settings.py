@@ -56,6 +56,7 @@ TAILWIND_APP_NAME = 'theme'
 
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -68,9 +69,13 @@ MIDDLEWARE = [
 
 if DEBUG:
     INSTALLED_APPS += [
-        'django_browser_reload']
+        'django_browser_reload',
+        'debug_toolbar']
     MIDDLEWARE += [
         'django_browser_reload.middleware.BrowserReloadMiddleware',
+    ]
+    INTERNAL_IPS = [
+        "127.0.0.1",
     ]
 
 ROOT_URLCONF = 'spasihrana.urls'

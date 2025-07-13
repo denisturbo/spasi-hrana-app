@@ -33,7 +33,7 @@ def profile(request):
     current_user = request.user
     print(request.user.user_type)
     customer = CustomerUser.objects.get(user=current_user)
-    return render(request, 'profile/profile.html', {'current_user': current_user,
+    return render(request, 'customer/profile/profile.html', {'current_user': current_user,
                                                     "customer": customer})
 
 
@@ -44,10 +44,9 @@ class ListingView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['sushi_listings'] = Listing.objects.filter(status='available',connection__business_type='sushi')
         context['coffee_listings'] = Listing.objects.filter(status='available',connection__business_type='coffee')
-        context['buffet_listings'] = Listing.objects.filter(status='available',connection__business_type='buffet')
-        context['doner_listings'] = Listing.objects.filter(status='available',connection__business_type='doner')
+        context['restaurant_listings'] = Listing.objects.filter(status='available',connection__business_type='restaurant')
+        context['fast_food_listings'] = Listing.objects.filter(status='available',connection__business_type='fast_food')
         context['other_listings'] = Listing.objects.filter(status='available',connection__business_type='other')
 
         return context
