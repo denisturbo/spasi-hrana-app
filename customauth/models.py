@@ -46,10 +46,9 @@ class BaseSpasiHranaUser(PermissionsMixin, AbstractBaseUser):
 
 class BusinessUser(CreatedUpdatedAtMixin, models.Model):
     BUSINESS_TYPE_CHOICES = [
-        ('sushi', 'Sushi'),
         ('coffee', 'Coffee'),
-        ('buffet', 'Buffet'),
-        ('doner', 'Doner'),
+        ('restaurant', 'Restaurant'),
+        ('fast_food', 'Fast Food'),
         ('other', 'Other'),
 
     ]
