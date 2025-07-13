@@ -3,27 +3,26 @@
 
 <!DOCTYPE html>
 <html lang="bg" class="smooth-scroll h-full bg-white">
-	<head>
-    <title>{% block head_title%}SpasiHrana{% endblock %}</title>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta http-equiv="X-UA-Compatible" content="ie=edge">
-		{% tailwind_css %}
-         {% htmx_script %}
-
-	</head>
-
-	<body hx-headers='{"x-csrftoken": "{{ csrf_token }}"}' class="flex flex-col min-h-svh bg-gray-50">
-		{%block template%}
-		{% include 'components/header.html'%}
-			<main class="grow">
-        {% block content %} 
-		
-		{% endblock content %}
-			</main>
-		{% include 'components/footer.html'%}
-		{%endblock template%}
-		<script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
-		<script src="{% static 'js/after-swap-init.js' %}"></script>
-	</body>
+<head>
+    <title>{% block head_title %}SpasiHrana{% endblock %}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% tailwind_css %}
+    {% htmx_script %}
+</head>
+<body hx-headers='{"x-csrftoken": "{{ csrf_token }}"}' class="flex flex-col min-h-svh bg-gray-50">
+{% block template %}
+    {% include 'components/header.html' %}
+    <main class="grow">
+        {% block content %}
+        {% endblock content %}
+    </main>
+    {% include 'components/footer.html' %}
+{% endblock template %}
+<script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+<script src="{% static 'js/after-swap-init.js' %}"></script>
+{% block js %}
+{% endblock js %}
+</body>
 </html>

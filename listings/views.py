@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.template.response import TemplateResponse
 
+from spasihrana.requests import HttpRequest
 from .forms import ListingCreation
 from django.contrib.auth.decorators import permission_required
 from listings.models import Listing
@@ -55,7 +56,7 @@ class InfoTableList(PermissionRequiredMixin, ListView):
         context['business'] = business
         return context
 
-    def get(self, request, *args, **kwargs):
+    def get(self, request: HttpRequest, *args, **kwargs):
         self.object_list = self.get_queryset()
         context = self.get_context_data()
 

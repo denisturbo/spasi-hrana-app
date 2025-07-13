@@ -42,8 +42,16 @@ class ListingView(ListView):
     template_name = 'customer/listings/listings.html'
     context_object_name = 'listings'
 
-    def get_queryset(self):
-        return Listing.objects.all()
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['sushi_listings'] = Listing.objects.filter(status='available',connection__business_type='sushi')
+        context['coffee_listings'] = Listing.objects.filter(status='available',connection__business_type='coffee')
+        context['buffet_listings'] = Listing.objects.filter(status='available',connection__business_type='buffet')
+        context['doner_listings'] = Listing.objects.filter(status='available',connection__business_type='doner')
+        context['other_listings'] = Listing.objects.filter(status='available',connection__business_type='other')
+
+        return context
+
 
 class ListingDetailView(DetailView):
     model = Listing

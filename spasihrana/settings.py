@@ -32,7 +32,8 @@ ALLOWED_HOSTS = []
 THIRD_PARTY_APPS = [
     'tailwind',
     'theme',
-    'django_htmx'
+    'django_htmx',
+    'template_partials',
 ]
 
 PROJECT_APPS = [
