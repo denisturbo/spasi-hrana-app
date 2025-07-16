@@ -6,7 +6,8 @@ from customauth.models import BaseSpasiHranaUser, BusinessUser, CustomerUser
 from django.db.models import Count, Q
 from django.contrib.auth.decorators import permission_required
 
-#Hrana app views 
+
+# Hrana app views
 
 def index(request):
     counts = BaseSpasiHranaUser.objects.aggregate(
@@ -14,19 +15,21 @@ def index(request):
         customers=Count('pk', filter=Q(user_type='customer'))
     )
     if request.user.is_authenticated and request.user.user_type == 'customer':
-        return render(request, 'landing/main.html', counts) # shte bude smeneno.. unauth i auth kato customer pokazva edno i sushto
+        return render(request, 'landing/main.html',
+                      counts)  # shte bude smeneno.. unauth i auth kato customer pokazva edno i sushto
     if request.user.is_authenticated and request.user.user_type == 'business':
         business_context = BusinessUser.objects.get(user=request.user)
         return render(request, 'business/main.html', {"business": business_context})
     else:
         return render(request, 'landing/main.html', counts)
-    
-    
+
+
 def faq(request):
     return render(request, 'landing/faq.html')
 
+
 def business(request):
-    return render(request, 'landing/business.html')    
+    return render(request, 'landing/business.html')
 
 
 def profile(request):
@@ -34,7 +37,7 @@ def profile(request):
     print(request.user.user_type)
     customer = CustomerUser.objects.get(user=current_user)
     return render(request, 'customer/profile/profile.html', {'current_user': current_user,
-                                                    "customer": customer})
+                                                             "customer": customer})
 
 
 class ListingView(ListView):
@@ -44,10 +47,12 @@ class ListingView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['coffee_listings'] = Listing.objects.filter(status='available',connection__business_type='coffee')
-        context['restaurant_listings'] = Listing.objects.filter(status='available',connection__business_type='restaurant')
-        context['fast_food_listings'] = Listing.objects.filter(status='available',connection__business_type='fast_food')
-        context['other_listings'] = Listing.objects.filter(status='available',connection__business_type='other')
+        context['coffee_listings'] = Listing.objects.filter(status='available', connection__business_type='coffee')
+        context['restaurant_listings'] = Listing.objects.filter(status='available',
+                                                                connection__business_type='restaurant')
+        context['fast_food_listings'] = Listing.objects.filter(status='available',
+                                                               connection__business_type='fast_food')
+        context['other_listings'] = Listing.objects.filter(status='available', connection__business_type='other')
 
         return context
 
@@ -61,6 +66,3 @@ class ListingDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['model'] = Listing.objects.get(id=self.kwargs['pk'])
         return context
-
-
-        

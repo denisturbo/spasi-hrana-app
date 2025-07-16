@@ -89,7 +89,7 @@ max_length=50, widget=TextInput(attrs={"placeholder": "Баничарницат�
                 label=("Адрес"),
 max_length=50, widget=TextInput(attrs={"placeholder": "ул. Лилия 1", "class": "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5", "autofocus": True})
     )
-    business_type = ChoiceField(choices=BusinessUser.BUSINESS_TYPE_CHOICES,
+    business_type = ChoiceField(choices=BusinessUser.BusinessTypeChoices.choices,
                                 widget=RadioSelect(attrs={"class": "w-4 h-4 text-orange-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-orange-500"}))
 
     class Meta:

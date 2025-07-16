@@ -45,19 +45,18 @@ class BaseSpasiHranaUser(PermissionsMixin, AbstractBaseUser):
 
 
 class BusinessUser(CreatedUpdatedAtMixin, models.Model):
-    BUSINESS_TYPE_CHOICES = [
-        ('coffee', 'Coffee'),
-        ('restaurant', 'Restaurant'),
-        ('fast_food', 'Fast Food'),
-        ('other', 'Other'),
+    class BusinessTypeChoices(models.TextChoices):
+        COFFEE = 'coffee', 'Coffee'
+        RESTAURANT = 'restaurant', 'Restaurant'
+        FAST_FOOD = 'fast_food', 'Fast Food'
+        OTHER = 'other', 'Other'
 
-    ]
 
     user = models.OneToOneField(BaseSpasiHranaUser, on_delete=models.CASCADE)
     business_name = models.CharField(max_length=50)
     location = models.CharField(max_length=50)
     profile_picture = models.ImageField(upload_to='pfps', null=True, blank=True)
-    business_type = models.CharField(max_length=10, choices=BUSINESS_TYPE_CHOICES)
+    business_type = models.CharField(max_length=10, choices=BusinessTypeChoices.choices)
 
     def __str__(self):
         return self.business_name
