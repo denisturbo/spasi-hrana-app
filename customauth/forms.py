@@ -1,18 +1,18 @@
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from django.forms import CharField, EmailField, ChoiceField
-from django.forms.widgets import TelInput, PasswordInput, RadioSelect, TextInput, EmailInput
+from django.forms import CharField, EmailField, ChoiceField, ImageField
+from django.forms.widgets import TelInput, PasswordInput, RadioSelect, TextInput, EmailInput, FileInput
 from customauth.models import BusinessUser, BaseSpasiHranaUser, CustomerUser
 from django.contrib.auth.models import Group
 
 class CustomLoginForm(AuthenticationForm):
     username = EmailField(
-        label=("Потребителско име"),
+        label="Потребителско име",
         widget=EmailInput(attrs={"autocomplete": "email", "placeholder": "Твоят email", "class": "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5", "autofocus": True})
     )
 
     
     password = CharField(
-        label=("Парола"),
+        label="Парола",
         strip=False,
         widget=PasswordInput(attrs={"placeholder": "••••••••",  "class":"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5", "required": "" ,"autocomplete": "current-password"}),
     )
@@ -47,11 +47,11 @@ class CustomBaseSignupForm(UserCreationForm):
 
 class CustomerSignupForm(CustomBaseSignupForm):
     first_name = CharField(
-                label=("Първо име"),
+                label="Първо име",
                 max_length=50, widget=TextInput(attrs={"placeholder": "Иван", "class": "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5", "autofocus": True})
                                     )
     last_name = CharField(
-                label=("Фамилно име"),
+                label="Фамилно име",
                 max_length=50, widget=TextInput(attrs={"placeholder": "Петров", "class": "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5", "autofocus": True})
                                     )
 
@@ -82,16 +82,16 @@ class CustomerSignupForm(CustomBaseSignupForm):
 
 class BusinessSignupForm(CustomBaseSignupForm):
     business_name = CharField(
-                label=("Име на бизнес"),
+                label="Име на бизнес",
 max_length=50, widget=TextInput(attrs={"placeholder": "Баничарницата", "class": "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5", "autofocus": True})
     )
     location = CharField(
-                label=("Адрес"),
+                label="Адрес",
 max_length=50, widget=TextInput(attrs={"placeholder": "ул. Лилия 1", "class": "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5", "autofocus": True})
     )
     business_type = ChoiceField(choices=BusinessUser.BusinessTypeChoices.choices,
                                 widget=RadioSelect(attrs={"class": "w-4 h-4 text-orange-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-orange-500"}))
-
+    profile_picture = ImageField(label="Профилна Снимка", widget=FileInput(attrs={"class": "block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"}))
     class Meta:
         model = BaseSpasiHranaUser
         fields = ['username', 'email', 'phone_number']
@@ -112,7 +112,7 @@ max_length=50, widget=TextInput(attrs={"placeholder": "ул. Лилия 1", "cla
                 business_name=self.cleaned_data['business_name'],
                 location=self.cleaned_data['location'],
                 business_type=self.cleaned_data['business_type'],
-
+                profile_picture=self.cleaned_data['profile_picture'],
             )
             group = Group.objects.get(name='Business')
             user.groups.add(group)

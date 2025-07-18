@@ -1,35 +1,65 @@
-from django.shortcuts import render, redirect
 from django.template.response import TemplateResponse
-
-from promocodes.forms import PromocodeCreation
+from promocodes.forms import PromocodeCreation, EditPromocode
 from promocodes.models import Promocode
-from customauth.models import BusinessUser
-from django.views.generic import ListView, CreateView, DeleteView
+from django.views.generic import ListView, CreateView, DeleteView, UpdateView
 from django.contrib.auth.mixins import PermissionRequiredMixin
-from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 
-# Create your views here.
+from spasihrana.requests import HttpRequest
 
+
+# Create your views here.
 
 class CreatePromocode(CreateView):
     model = Promocode
     template_name = 'business/promocodes/create.html'
     form_class = PromocodeCreation
-    success_url = reverse_lazy('promocodes:create')
+    success_url = reverse_lazy('promocodes:infotable')
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
 
     def form_valid(self, form):
-        new_list = form.save(commit=False)
-        new_list.connection = self.request.user.businessuser
-        new_list.save()
+        promocode = form.save(commit=False)
+        promocode.connection = self.request.user.businessuser
+        promocode.save()
+        form.save_m2m()
         return super().form_valid(form)
+
+
+
+
+class PromocodeEdit(PermissionRequiredMixin, UpdateView):
+    permission_required = ('customauth.can_create_listing')
+    model = Promocode
+    form_class = EditPromocode
+    template_name = 'business/promocodes/edit.html'
+    success_url = reverse_lazy('promocodes:infotable')
+
+
+    def get_queryset(self):
+        return Promocode.objects.filter(connection=self.request.user.businessuser)
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
+
+    def form_valid(self, form):
+        promocode = form.save(commit=False)
+        promocode.connection = self.request.user.businessuser
+        promocode.save()
+        form.save_m2m()
+        return super().form_valid(form)
+
+
 
 class DeletePromocode(PermissionRequiredMixin, DeleteView):
     permission_required = ('customauth.can_create_listing')
     model = Promocode
     success_url = reverse_lazy('index')
-
-
 
 class InfoTableList(PermissionRequiredMixin, ListView):
     permission_required = ('customauth.can_create_listing')
@@ -38,16 +68,9 @@ class InfoTableList(PermissionRequiredMixin, ListView):
     template_name = 'business/promocodes/data-table.html'
 
     def get_queryset(self):
-        business = get_object_or_404(BusinessUser, user=self.request.user)
-        return Promocode.objects.filter(connection=business)
+        return Promocode.objects.filter(connection=self.request.user.businessuser)
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        business_user = get_object_or_404(BusinessUser, user=self.request.user)
-        context['promocode'] = business_user
-        return context
-
-    def get(self, request, *args, **kwargs):
+    def get(self,request:HttpRequest,  *args, **kwargs):
         self.object_list = self.get_queryset()
         context = self.get_context_data()
 

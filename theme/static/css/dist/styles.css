@@ -315,9 +315,6 @@
   .my-6 {
     margin-block: calc(var(--spacing) * 6);
   }
-  .-ms-2 {
-    margin-inline-start: calc(var(--spacing) * -2);
-  }
   .ms-0 {
     margin-inline-start: calc(var(--spacing) * 0);
   }
@@ -329,9 +326,6 @@
   }
   .me-1 {
     margin-inline-end: calc(var(--spacing) * 1);
-  }
-  .me-2 {
-    margin-inline-end: calc(var(--spacing) * 2);
   }
   .me-4 {
     margin-inline-end: calc(var(--spacing) * 4);
@@ -454,12 +448,6 @@
   .h-100 {
     height: calc(var(--spacing) * 100);
   }
-  .h-\[100px\] {
-    height: 100px;
-  }
-  .h-\[500px\] {
-    height: 500px;
-  }
   .h-auto {
     height: auto;
   }
@@ -522,12 +510,6 @@
   }
   .w-100 {
     width: calc(var(--spacing) * 100);
-  }
-  .w-500 {
-    width: calc(var(--spacing) * 500);
-  }
-  .w-\[500px\] {
-    width: 500px;
   }
   .w-full {
     width: 100%;
@@ -1069,9 +1051,6 @@
   .text-white {
     color: var(--color-white);
   }
-  .text-yellow-300 {
-    color: var(--color-yellow-300);
-  }
   .text-yellow-500 {
     color: var(--color-yellow-500);
   }
@@ -1199,17 +1178,9 @@
     }
   }
   @media (hover: hover) {
-    .hover\:no-underline:hover {
-      text-decoration-line: none;
-    }
-  }
-  @media (hover: hover) {
     .hover\:underline:hover {
       text-decoration-line: underline;
     }
-  }
-  .focus\:z-10:focus {
-    z-index: 10;
   }
   .focus\:border-blue-500:focus {
     border-color: var(--color-blue-500);
@@ -1230,9 +1201,6 @@
   }
   .focus\:ring-gray-50:focus {
     --tw-ring-color: var(--color-gray-50);
-  }
-  .focus\:ring-gray-100:focus {
-    --tw-ring-color: var(--color-gray-100);
   }
   .focus\:ring-gray-200:focus {
     --tw-ring-color: var(--color-gray-200);
@@ -1287,11 +1255,6 @@
     }
   }
   @media (width >= 40rem) {
-    .sm\:flex {
-      display: flex;
-    }
-  }
-  @media (width >= 40rem) {
     .sm\:hidden {
       display: none;
     }
@@ -1322,18 +1285,8 @@
     }
   }
   @media (width >= 40rem) {
-    .sm\:items-center {
-      align-items: center;
-    }
-  }
-  @media (width >= 40rem) {
     .sm\:justify-center {
       justify-content: center;
-    }
-  }
-  @media (width >= 40rem) {
-    .sm\:gap-4 {
-      gap: calc(var(--spacing) * 4);
     }
   }
   @media (width >= 40rem) {
@@ -1628,11 +1581,6 @@
     }
   }
   @media (width >= 64rem) {
-    .lg\:grid-cols-2 {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-  @media (width >= 64rem) {
     .lg\:grid-cols-3 {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
@@ -1779,12 +1727,6 @@
   .rtl\:text-right:where(:dir(rtl), [dir="rtl"], [dir="rtl"] *) {
     text-align: right;
   }
-  .dark\:block:where(.dark, .dark *) {
-    display: block;
-  }
-  .dark\:hidden:where(.dark, .dark *) {
-    display: none;
-  }
   :where(.dark\:divide-gray-600:where(.dark, .dark *) > :not(:last-child)) {
     border-color: var(--color-gray-600);
   }
@@ -1812,9 +1754,6 @@
   }
   .dark\:bg-orange-600:where(.dark, .dark *) {
     background-color: var(--color-orange-600);
-  }
-  .dark\:bg-yellow-600:where(.dark, .dark *) {
-    background-color: var(--color-yellow-600);
   }
   .dark\:text-gray-200:where(.dark, .dark *) {
     color: var(--color-gray-200);
@@ -1846,16 +1785,6 @@
       background-color: var(--color-orange-700);
     }
   }
-  @media (hover: hover) {
-    .dark\:hover\:bg-yellow-700:where(.dark, .dark *):hover {
-      background-color: var(--color-yellow-700);
-    }
-  }
-  @media (hover: hover) {
-    .dark\:hover\:text-white:where(.dark, .dark *):hover {
-      color: var(--color-white);
-    }
-  }
   .dark\:focus\:border-blue-500:where(.dark, .dark *):focus {
     border-color: var(--color-blue-500);
   }
@@ -1865,17 +1794,11 @@
   .dark\:focus\:ring-gray-600:where(.dark, .dark *):focus {
     --tw-ring-color: var(--color-gray-600);
   }
-  .dark\:focus\:ring-gray-700:where(.dark, .dark *):focus {
-    --tw-ring-color: var(--color-gray-700);
-  }
   .dark\:focus\:ring-gray-800:where(.dark, .dark *):focus {
     --tw-ring-color: var(--color-gray-800);
   }
   .dark\:focus\:ring-orange-800:where(.dark, .dark *):focus {
     --tw-ring-color: var(--color-orange-800);
-  }
-  .dark\:focus\:ring-yellow-800:where(.dark, .dark *):focus {
-    --tw-ring-color: var(--color-yellow-800);
   }
 }
 @layer base {

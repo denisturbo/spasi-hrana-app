@@ -29,7 +29,7 @@ def customer_signup(request):
 def business_signup(request):
     if not request.user.is_authenticated:
         if request.method == 'POST':
-            form = BusinessSignupForm(request.POST)
+            form = BusinessSignupForm(request.POST, request.FILES)
             if form.is_valid():
                 user = form.save()
                 login(request, user)

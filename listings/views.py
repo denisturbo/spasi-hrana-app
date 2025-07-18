@@ -1,12 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.template.response import TemplateResponse
 
 from spasihrana.requests import HttpRequest
-from .forms import ListingCreation
-from django.contrib.auth.decorators import permission_required
+from .forms import ListingCreation, ListingEdit
 from listings.models import Listing
-from customauth.models import BusinessUser
-from django.views.generic import ListView, CreateView, DeleteView
+from django.views.generic import ListView, CreateView, DeleteView, UpdateView
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.urls import reverse_lazy
@@ -20,6 +18,23 @@ class CreateListing(PermissionRequiredMixin, CreateView):
     template_name = 'business/offers/create.html'
     form_class = ListingCreation
     success_url = reverse_lazy('listings:infotable')
+
+    def form_valid(self, form):
+        new_list = form.save(commit=False)
+        new_list.connection = self.request.user.businessuser
+        new_list.save()
+        return super().form_valid(form)
+
+
+class EditListing(PermissionRequiredMixin, UpdateView):
+    permission_required = ('customauth.can_create_listing')
+    model = Listing
+    form_class = ListingEdit
+    template_name = 'business/offers/edit.html'
+    success_url = reverse_lazy('listings:infotable')
+
+    def get_queryset(self):
+        return Listing.objects.filter(connection=self.request.user.businessuser)
 
     def form_valid(self, form):
         new_list = form.save(commit=False)
@@ -42,19 +57,12 @@ def delete_list(request, pk):
 
 class InfoTableList(PermissionRequiredMixin, ListView):
     permission_required = ('customauth.can_create_listing')
-    paginate_by = 1
+    paginate_by = 10
     model = Listing
     template_name = 'business/offers/data-table.html'
 
     def get_queryset(self):
-        business = get_object_or_404(BusinessUser, user=self.request.user)
-        return Listing.objects.filter(connection=business)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        business = get_object_or_404(BusinessUser, user=self.request.user)
-        context['business'] = business
-        return context
+        return Listing.objects.filter(connection=self.request.user.businessuser)
 
     def get(self, request: HttpRequest, *args, **kwargs):
         self.object_list = self.get_queryset()
