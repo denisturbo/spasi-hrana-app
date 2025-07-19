@@ -14,7 +14,7 @@
         </thead>
         <tbody id="listingtable" hx-target="this" hx-swap="outerHTML">
         {% for listing in object_list %}
-            <tr class="bg-white border-b  border-gray-200 hover:bg-gray-50 ">
+            <tr class="bg-white border-b  border-gray-200 hover:bg-gray-50 " id="listingrow-{{ listing.pk }}">
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                     {{ listing.pk }}
                 </th>
@@ -29,11 +29,10 @@
                 </td>
                 <td class="px-6 py-4">
                     {% status_indicator listing.status %}
-
                 </td>
                 <td class="px-6 py-4">
-                    <button id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDots-{{ listing.pk }}"
-                            class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                    <button id="dropdownMenuIconButton-{{ listing.pk }}" data-dropdown-toggle="dropdownDots-{{ listing.pk }}"
+                            class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50"
                             type="button">
                         <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                              viewBox="0 0 4 15">
@@ -43,17 +42,14 @@
 
                     <!-- Dropdown menu -->
                     <div id="dropdownDots-{{ listing.pk }}"
-                         class="z-10000 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700 dark:divide-gray-600">
-                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
-                            aria-labelledby="dropdownMenuIconButton">
+                         class="z-10000 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44">
+                        <ul class="py-2 text-sm text-gray-700"
+                            aria-labelledby="dropdownMenuIconButton-{{ listing.pk }}">
                             <li>
                                 <a href="{% url 'listings:edit' listing.pk %}" class="block px-4 py-2 hover:bg-gray-100">Промени</a>
                             </li>
                             <li>
-                                <form action="{% url 'listings:delete' listing.pk %}" method="post">
-                                    {% csrf_token %}
-                                    <button class="block px-4 py-2 hover:bg-gray-100">Изтрий</button>
-                                </form>
+                                <button hx-delete="{% url 'listings:delete' listing.pk %}?page={{ page_obj.number }}" hx-target="#section-table" hx-swap="outerHTML" class="block px-4 py-2 hover:bg-gray-100">Изтрий</button>
                             </li>
                         </ul>
                     </div>
