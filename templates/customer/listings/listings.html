@@ -2,44 +2,16 @@
 {% block head_title %} {{ block.super }} | Всички оферти{% endblock %}
 {% load static %}
 {% block content %}
-<section>
+    <section>
         <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6  lg:max-w-7xl">
             <div class='text-center mb-5 text-xl font-bold'>
                 <p>Всички оферти</p>
             </div>
             <div class="grid grid-cols-1 gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-                {% for listing in listings %}
-                    <a href="{% url 'listingDetail' listing.id %}"
-                       class="group bg-gray-200 rounded-lg scale-100 hover:scale-105 ease-in duration-75">
-                        <p class="mt-4 text-lg text-center font-bold text-black-900">{{ listing.title }}</p>
-                        <div class="bg-gray-600 rounded-lg overflow-hidden relative flex justify-center items-center">
-                            {% if listing.image %}
-                                <img src="{{ listing.image.url }}" alt="{{ listing.title }}" class="w-50 h-50 object-cover"/>
-                            {% else %}
-                                <img src="https://cdn-881a96c5-a77b871b.commercebuild.com/9c11605d8e09681aa14e671430afe003/contents/global/no_available_image.gif"
-                                     alt="Default Image" class="w-50 h-50 object-cover"/>
-                            {% endif %}
-                        </div>
-                        <p class="text-sm font-medium text-blue-900 flex items-center">
-                            Локация: {{ listing.connection.location }}
-                        </p>
-                        <p class="text-sm font-medium text-blue-900 flex items-center">
-                            Фирма: {{ listing.connection.business_name }}
-                        </p>
-                        <p class="text-sm font-medium text-blue-900 flex items-center">
-                            Цена: {{ listing.price }} лв. // {{ listing.eur_price }} €
-                        </p>
-                    </a>
-                {% empty %}
-                    <div class="col-span-full flex justify-center items-center">
-                        <h1 class="text-2xl font-bold text-center text-gray-900">
-                            Няма оферти..
-                        </h1>
-                    </div>
-                {% endfor %}
+                    {% include 'htmx-partials/listing_partial.html' %}
             </div>
         </div>
-</section>
+    </section>
 {% endblock %}
 
 

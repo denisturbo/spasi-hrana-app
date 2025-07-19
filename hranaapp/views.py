@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect
+from django.template.response import TemplateResponse
 from listings.models import Listing
 from django.views.generic import ListView, DetailView
-from django.contrib.auth.mixins import LoginRequiredMixin
 from customauth.models import BaseSpasiHranaUser, BusinessUser, CustomerUser
 from django.db.models import Count, Q
-from django.contrib.auth.decorators import permission_required
+from spasihrana.requests import HttpRequest
 
 
 # Hrana app views
@@ -44,11 +44,20 @@ class ListingView(ListView):
     model = Listing
     template_name = 'customer/listings/listings.html'
     context_object_name = 'listings'
-
+    paginate_by = 10
 
     def get_queryset(self):
         return Listing.objects.all()
 
+    def get(self, request: HttpRequest, *args, **kwargs):
+        self.object_list = self.get_queryset()
+        context = self.get_context_data()
+
+        if request.htmx:
+            print('vliza')
+            return TemplateResponse(request, "htmx-partials/listing_partial.html", context)
+        else:
+            return TemplateResponse(request, self.template_name, context)
 
 class ListingDetailView(DetailView):
     model = Listing
