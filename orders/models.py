@@ -7,4 +7,3 @@ from hranaapp.mixins import CreatedUpdatedAtMixin
 class Order(CreatedUpdatedAtMixin, models.Model):
     listing = models.ForeignKey('listings.Listing', on_delete=models.CASCADE)
     customer = models.ForeignKey('customauth.CustomerUser', on_delete=models.CASCADE)
-    promocode = models.ForeignKey('promocodes.Promocode', null=True, blank=True, on_delete=models.CASCADE)

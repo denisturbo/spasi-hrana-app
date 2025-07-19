@@ -43,7 +43,6 @@ PROJECT_APPS = [
     'hranaapp',
     'listings',
     'customauth',
-    'promocodes',
     'orders',
 ]
 INSTALLED_APPS = [
