@@ -17,9 +17,10 @@ def index(request):
     if request.user.is_authenticated and request.user.user_type == 'customer':
         return render(request, 'landing/main.html',
                       counts)  # shte bude smeneno.. unauth i auth kato customer pokazva edno i sushto
-    if request.user.is_authenticated and request.user.user_type == 'business':
+    elif request.user.is_authenticated and request.user.user_type == 'business':
         business_context = BusinessUser.objects.get(user=request.user)
-        return render(request, 'business/main.html', {"business": business_context})
+        business_counts = BusinessUser.objects.aggregate(active_offers=Count('pk', filter=Q(listing__status='available', user=request.user)))
+        return render(request, 'business/main.html', {"business": business_context, "count": business_counts})
     else:
         return render(request, 'landing/main.html', counts)
 
@@ -44,7 +45,7 @@ class ListingView(ListView):
     model = Listing
     template_name = 'customer/listings/listings.html'
     context_object_name = 'listings'
-    paginate_by = 10
+    paginate_by = 1
 
     def get_queryset(self):
         return Listing.objects.all()
