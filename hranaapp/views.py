@@ -1,5 +1,7 @@
+from django.db.models.aggregates import Sum
 from django.shortcuts import render, redirect
-from django.template.response import TemplateResponse
+from orders.models import Order
+from listings.choices import ListingStatus
 from listings.models import Listing
 from django.views.generic import ListView, DetailView
 from customauth.models import BaseSpasiHranaUser, BusinessUser, CustomerUser
@@ -10,19 +12,20 @@ from spasihrana.requests import HttpRequest
 # Hrana app views
 
 def index(request):
-    counts = BaseSpasiHranaUser.objects.aggregate(
-        business=Count('pk', filter=Q(user_type='business')),
-        customers=Count('pk', filter=Q(user_type='customer'))
-    )
-    if request.user.is_authenticated and request.user.user_type == 'customer':
-        return render(request, 'landing/main.html',
-                      counts)  # shte bude smeneno.. unauth i auth kato customer pokazva edno i sushto
-    elif request.user.is_authenticated and request.user.user_type == 'business':
+    if request.user.is_authenticated and request.user.user_type == 'business':
         business_context = BusinessUser.objects.get(user=request.user)
-        business_counts = BusinessUser.objects.aggregate(active_offers=Count('pk', filter=Q(listing__status='available', user=request.user)))
+        business_counts = BusinessUser.objects.aggregate(
+            active_offers=Count('pk', filter=Q(listing__status='available', user=request.user)),
+            total_sales=Count('pk', filter=Q(listing__status='completed', user=request.user)),
+            total_revenue=Sum('listing__price', filter=Q(listing__status='completed', user=request.user)))
         return render(request, 'business/main.html', {"business": business_context, "count": business_counts})
     else:
-        return render(request, 'landing/main.html', counts)
+        counts = BaseSpasiHranaUser.objects.aggregate(
+            business=Count('pk', filter=Q(user_type='business')),
+            customers=Count('pk', filter=Q(user_type='customer'))
+        )
+        return render(request, 'landing/main.html',
+                  counts)
 
 
 def faq(request):
@@ -37,8 +40,9 @@ def profile(request):
     current_user = request.user
     print(request.user.user_type)
     customer = CustomerUser.objects.get(user=current_user)
-    return render(request, 'customer/profile/profile.html', {'current_user': current_user,
-                                                             "customer": customer})
+    customer_orders = Order.objects.filter(customer=customer).order_by('-created_at')[:5]
+    return render(request, 'customer/profile/profile.html', {"customer": customer,
+                                                             'orders': customer_orders})
 
 
 class ListingView(ListView):
@@ -48,7 +52,7 @@ class ListingView(ListView):
     paginate_by = 1
 
     def get_queryset(self):
-        return Listing.objects.all()
+        return Listing.objects.filter(status='available').order_by('-created_at')
 
     def get(self, request: HttpRequest, *args, **kwargs):
         self.object_list = self.get_queryset()
@@ -56,16 +60,18 @@ class ListingView(ListView):
 
         if request.htmx:
             print('vliza')
-            return TemplateResponse(request, "htmx-partials/listing_partial.html", context)
+            return render(request, "htmx-partials/listing_partial.html", context)
         else:
-            return TemplateResponse(request, self.template_name, context)
+            return render(request, self.template_name, context)
 
 class ListingDetailView(DetailView):
     model = Listing
     template_name = 'customer/listings/listingdetail.html'
     context_object_name = 'listing_detail'
 
+    def get_queryset(self):
+        return Listing.objects.filter(status=ListingStatus.AVAILABLE)
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['model'] = Listing.objects.get(id=self.kwargs['pk'])
         return context

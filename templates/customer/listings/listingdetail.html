@@ -38,10 +38,10 @@
     <section class="bg-white py-8 antialiased">
         <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
             <div class="mx-auto max-w-5xl">
-                <h2 class="text-xl font-semibold text-gray-900 sm:text-2xl">Payment</h2>
-                <div class="mt-6 sm:mt-8 lg:flex lg:items-start lg:gap-12">
+                <h2 class="text-xl font-semibold text-gray-900 sm:text-2xl">Поръчка</h2>
+                <div class="mt-6 sm:mt-8 lg:flex lg:items-start lg:gap-12" id="ordering-swap">
                     <div class="mt-6 grow sm:mt-8 lg:mt-0">
-                        <div class="space-y-4 rounded-lg border border-gray-100 bg-gray-50 p-6 dark:border-gray-700 dark:bg-gray-800">
+                        <div class="space-y-4 rounded-lg border border-gray-100 bg-gray-50 p-6">
                             <div class="space-y-2">
                                 <dl class="flex items-center justify-between gap-2">
                                     <dt class="text-base font-normal text-gray-500">Цена</dt>
@@ -57,10 +57,21 @@
                                 </dd>
                             </dl>
                         </div>
-                        <button type="submit"
-                                class="flex w-full items-center justify-center rounded-lg bg-blue-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4  focus:ring-blue-300">
+                        {% if user.is_authenticated %}
+                        <button hx-post="{% url 'orders:create' listing_detail.pk %}" hx-target="#ordering-swap"
+                                hx-swap="innerHTML"
+                                class="flex w-full items-center justify-center rounded-lg bg-blue-700 px-5 py-2.5 text-sm
+                            font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4
+                            focus:ring-blue-300">
                             Продължи
                         </button>
+                        {% else %}
+                        <a href="{% url 'signin' %}" class="flex w-full items-center justify-center rounded-lg bg-blue-700 px-5 py-2.5 text-sm
+                            font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4
+                            focus:ring-blue-300">
+                            Нужно е да си регистриан
+                        </a>
+                        {% endif %}
                     </div>
                 </div>
             </div>

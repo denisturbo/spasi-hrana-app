@@ -1,0 +1,11 @@
+<div class="mt-6 grow sm:mt-8 lg:mt-0">
+    <div class="space-y-4 rounded-lg border border-gray-100 bg-gray-50 p-6">
+        <div class="space-y-2">
+            <p class="font-bold text-xl">Твоят код е: {{ order.verification_code }}</p>
+        </div>
+        <div class="space-y-2">
+            <p class="font-bold text-xl">Oбща сума за плащане в обекта: {{ order.listing.price }} лв.
+                || {{ order.listing.eur_price }} €</p>
+        </div>
+    </div>
+</div>

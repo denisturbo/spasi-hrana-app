@@ -25,6 +25,7 @@ urlpatterns = [
     path('', index, name='index'),
     path('faq/', faq, name='faq'),
     path('auth/', include("customauth.urls")),
+    path('orders/', include("orders.urls")),
     path('', include('listings.urls')),
     path('listing/<int:pk>/', ListingDetailView.as_view(), name='listingDetail'),
     path('listings/', ListingView.as_view(), name='listingList' ),

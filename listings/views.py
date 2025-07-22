@@ -1,13 +1,9 @@
 from django.core.paginator import Paginator
-from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
-from django.template.response import TemplateResponse
-
 from spasihrana.requests import HttpRequest
 from .forms import ListingCreation, ListingEdit
 from listings.models import Listing
 from django.views.generic import ListView, CreateView, DeleteView, UpdateView
-from django.shortcuts import get_object_or_404
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.urls import reverse_lazy
 
@@ -98,6 +94,6 @@ class InfoTableList(PermissionRequiredMixin, ListView):
 
         if request.htmx:
             print('vliza')
-            return TemplateResponse(request, "htmx-partials/listing_table_partial.html", context)
+            return render(request, "htmx-partials/listing_table_partial.html", context)
         else:
-            return TemplateResponse(request, self.template_name, context)
+            return render(request, self.template_name, context)
