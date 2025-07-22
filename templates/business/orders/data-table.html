@@ -1,0 +1,13 @@
+{% extends 'business/main.html' %}
+
+{% block title %} | Таблица {% endblock %}
+
+{% block content %}
+    <main class="ml-64 mt-16 flex-1">
+        <div id="table-container" class="mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div class="bg-white shadow sm:rounded-lg p-6">
+                {% include 'htmx-partials/order_table_partial.html' %}
+            </div>
+        </div>
+    </main>
+{% endblock %}
