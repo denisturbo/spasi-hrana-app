@@ -18,7 +18,8 @@ def index(request):
             active_offers=Count('pk', filter=Q(listing__status='available', user=request.user)),
             total_sales=Count('pk', filter=Q(listing__status='completed', user=request.user)),
             total_revenue=Sum('listing__price', filter=Q(listing__status='completed', user=request.user)))
-        return render(request, 'business/main.html', {"business": business_context, "count": business_counts})
+        return render(request, 'business/main.html', {"business": business_context,
+                                          "count": business_counts})
     else:
         counts = BaseSpasiHranaUser.objects.aggregate(
             business=Count('pk', filter=Q(user_type='business')),

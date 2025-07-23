@@ -12,7 +12,7 @@ class Listing(CreatedUpdatedAtMixin, models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
     image = models.ImageField(upload_to='listing_thumbs')
-    price = models.DecimalField(max_digits=6, decimal_places=2,
+    price = models.DecimalField(max_digits=10, decimal_places=2,
                                 validators=[MinValueValidator(0.01,
                                             message='Сумата трябва да е над 0.01')])
     status = models.CharField(max_length=20, choices=ListingStatus.choices, default=ListingStatus.AVAILABLE)
