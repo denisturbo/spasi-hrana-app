@@ -21,7 +21,9 @@
                     <label for="{{ form.password.id_password }}" class="block mb-2 text-sm font-medium text-gray-900">Парола</label>
                     {{ form.password }}
                 </div>
-                                  {{ form.non_field_errors }}
+{% for k, v in form.errors.items %}
+        {{ v }}<br>
+   {% endfor %}
                   <div class="flex">
                       <a href="#" class="text-sm font-medium text-orange-600 hover:underline">Забравена парола?</a>
                   </div>
