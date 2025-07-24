@@ -4,12 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from customauth.forms import CustomLoginForm, CustomerSignupForm, BusinessSignupForm
 from django.contrib.auth import login
 
-#Auth Views 
-
-
-def forgot_password(request):
-    return render(request, 'auth/forgot_password.html')
-
+#Auth Views
 
 def customer_signup(request):
     if not request.user.is_authenticated:
@@ -41,7 +36,6 @@ def business_signup(request):
         return redirect('/')
                
 class Logout(LoginRequiredMixin, LogoutView):
-    template_name = 'auth/logout.html'
     next_page = '/'
     
 class Login(LoginView):
