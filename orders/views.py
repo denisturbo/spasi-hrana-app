@@ -23,7 +23,7 @@ class CreateOrder(LoginRequiredMixin, CreatedUpdatedAtMixin, View):
             business=listing.connection,
         )
 
-        listing.status = 'ordered'
+        listing.status = ListingStatus.ORDERED
         listing.save()
 
         return render(request, 'htmx-partials/confirmed_list_partial.html', {
