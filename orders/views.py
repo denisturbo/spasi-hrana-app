@@ -5,6 +5,7 @@ from django.urls import reverse_lazy
 from django.views.generic import View, ListView, UpdateView
 
 from hranaapp.mixins import CreatedUpdatedAtMixin
+from listings.choices import ListingStatus
 from listings.models import Listing
 from orders.models import Order
 from spasihrana.requests import HttpRequest
@@ -61,7 +62,7 @@ class CompleteOrder(PermissionRequiredMixin, UpdateView):
         if request.htmx:
             current_page = request.GET.get('page', 1)
             print(self.object.listing.status, "IMA LI NQKOI")
-            self.object.listing.status = 'completed'
+            self.object.listing.status = ListingStatus.COMPLETED
             self.object.listing.save()
             print(self.object.listing.status, "IMA LI NQKOI")
 

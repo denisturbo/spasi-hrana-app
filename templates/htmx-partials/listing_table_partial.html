@@ -45,12 +45,12 @@
                          class="z-10000 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44">
                         <ul class="py-2 text-sm text-gray-700"
                             aria-labelledby="dropdownMenuIconButton-{{ listing.pk }}">
+                            {% if listing.status != 'completed' %}
                             <li>
                                 <a href="{% url 'listings:edit' listing.pk %}" class="block px-4 py-2 hover:bg-gray-100">Промени</a>
                             </li>
-                            <li>
+                            {% endif %}
                                 <button hx-delete="{% url 'listings:delete' listing.pk %}?page={{ page_obj.number }}" hx-target="#section-table" hx-swap="outerHTML" class="block px-4 py-2 hover:bg-gray-100">Изтрий</button>
-                            </li>
                         </ul>
                     </div>
                 </td>
