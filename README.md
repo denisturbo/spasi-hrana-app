@@ -55,7 +55,7 @@ python manage.py collectstatic
 
 ## ⭐ Bonuses – Up to **15%**
 
-- At least **10 Unit & Integration Tests**
+- ✅ At least **10 Unit & Integration Tests**
 - **Asynchronous Views**
 - **Django REST Capabilities**
 - ✅ **Extended Django User Model**
