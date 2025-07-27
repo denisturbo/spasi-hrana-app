@@ -45,7 +45,7 @@ class DeleteListing(PermissionRequiredMixin, DeleteView):
     permission_required = ('customauth.can_create_listing')
     model = Listing
     success_url = reverse_lazy('listings:infotable')
-    def delete(self, request, *args, **kwargs):
+    def delete(self, request: HttpRequest, *args, **kwargs):
         self.object = self.get_object()
 
         if request.htmx:
