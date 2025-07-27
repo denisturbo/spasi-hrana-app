@@ -1,8 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+from customauth.choices import BusinessTypeChoices, UserTypeChoices
 from customauth.managers import UserManager
-from django.core.validators import RegexValidator
-
+from customauth.validators import BulgarianPhoneNumberValidator
 from hranaapp.mixins import CreatedUpdatedAtMixin
 
 
@@ -10,17 +10,10 @@ from hranaapp.mixins import CreatedUpdatedAtMixin
 
 class BaseSpasiHranaUser(PermissionsMixin, AbstractBaseUser):
 
-    
-    USER_TYPE_CHOICES = [
-        ('customer', 'Customer'),
-        ('business', 'Business'),
-    ]
-
     username = models.CharField(max_length=50, unique=True)
     email = models.EmailField(unique=True)
-    user_type = models.CharField(max_length=10, choices=USER_TYPE_CHOICES)
-    phone_number = models.CharField(max_length=13, validators=[RegexValidator(regex=r'^(\+)?(359|0)8[789]\d{7}$',
-                                                                              message=("Моля въведете валиден български тел. номер"))])
+    user_type = models.CharField(max_length=10, choices=UserTypeChoices.choices)
+    phone_number = models.CharField(max_length=13, validators=[BulgarianPhoneNumberValidator()])
 
 
 
@@ -39,17 +32,7 @@ class BaseSpasiHranaUser(PermissionsMixin, AbstractBaseUser):
         verbose_name_plural = "All users"
 
 
-
-    
-
-
-
 class BusinessUser(CreatedUpdatedAtMixin, models.Model):
-    class BusinessTypeChoices(models.TextChoices):
-        COFFEE = 'coffee', 'Coffee'
-        RESTAURANT = 'restaurant', 'Restaurant'
-        FAST_FOOD = 'fast_food', 'Fast Food'
-        OTHER = 'other', 'Other'
 
 
     user = models.OneToOneField(BaseSpasiHranaUser, on_delete=models.CASCADE)

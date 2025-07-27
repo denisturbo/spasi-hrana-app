@@ -1,5 +1,5 @@
 from django.db.models.aggregates import Sum
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from orders.models import Order
 from listings.choices import ListingStatus
 from listings.models import Listing
