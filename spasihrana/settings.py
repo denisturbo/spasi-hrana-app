@@ -104,12 +104,15 @@ WSGI_APPLICATION = 'spasihrana.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": env.str('DB_NAME'),
+        "USER": env.str('DB_USER'),
+        "PASSWORD": env.str('DB_PASSWORD'),
+        "HOST": env.str('DB_HOST'),
+        "PORT": env.str('DB_PORT'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
@@ -155,7 +158,7 @@ LOGIN_URL = '/auth/signin/'
 LOGIN_REDIRECT_URL = '/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'uploads'
-
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 print(STATIC_URL)
 # Default primary key field type
