@@ -64,5 +64,5 @@ class DeleteAccountView(LoginRequiredMixin, DeleteView):
         user = self.request.user
         print(user)
         if hasattr(user, 'businessuser'):
-            return ["business/settings.html"]
-        return ["customer/profile/settings.html"]
+            return "business/settings.html"
+        return "customer/profile/settings.html"
