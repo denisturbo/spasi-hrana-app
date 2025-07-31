@@ -327,3 +327,5 @@ dist
 
 # Media
 uploads
+__pycache__/
+*.pyc
