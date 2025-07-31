@@ -1,12 +1,8 @@
 from django.db.models.aggregates import Sum
 from django.shortcuts import render
 from orders.models import Order
-from listings.choices import ListingStatus
-from listings.models import Listing
-from django.views.generic import ListView, DetailView
 from customauth.models import BaseSpasiHranaUser, BusinessUser, CustomerUser
 from django.db.models import Count, Q
-from spasihrana.requests import HttpRequest
 
 
 # Hrana app views
@@ -44,35 +40,3 @@ def profile(request):
     customer_orders = Order.objects.filter(customer=customer).order_by('-created_at')[:5]
     return render(request, 'customer/profile/profile.html', {"customer": customer,
                                                              'orders': customer_orders})
-
-
-class ListingView(ListView):
-    model = Listing
-    template_name = 'customer/listings/listings.html'
-    context_object_name = 'listings'
-    paginate_by = 10
-
-    def get_queryset(self):
-        return Listing.objects.filter(status='available').order_by('-created_at')
-
-    def get(self, request: HttpRequest, *args, **kwargs):
-        self.object_list = self.get_queryset()
-        context = self.get_context_data()
-
-        if request.htmx:
-            print('vliza')
-            return render(request, "htmx-partials/listing_partial.html", context)
-        else:
-            return render(request, self.template_name, context)
-
-class ListingDetailView(DetailView):
-    model = Listing
-    template_name = 'customer/listings/listingdetail.html'
-    context_object_name = 'listing_detail'
-
-    def get_queryset(self):
-        return Listing.objects.filter(status=ListingStatus.AVAILABLE)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context

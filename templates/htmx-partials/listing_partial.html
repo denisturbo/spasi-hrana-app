@@ -35,7 +35,7 @@
                 </div>
             </div>
         </div>
-        <a href="{% url 'listingDetail' listing.id %}" class="block group">
+        <a href="{% url 'listings:listingDetail' listing.id %}" class="block group">
             <p class="text-lg text-center font-bold text-black-900 mb-2">{{ listing.title }}</p>
             <div class="bg-gray-600 rounded-lg overflow-hidden flex justify-center items-center mb-3">
                 {% if listing.image %}

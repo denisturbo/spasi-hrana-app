@@ -17,7 +17,7 @@ Including another URLconf
 from debug_toolbar.toolbar import debug_toolbar_urls
 from django.contrib import admin
 from django.urls import path, include
-from hranaapp.views import index, faq, ListingDetailView, ListingView, business, profile
+from hranaapp.views import index, faq, business, profile
 from django.conf import settings
 from django.conf.urls.static import static
 urlpatterns = [
@@ -27,11 +27,9 @@ urlpatterns = [
     path('auth/', include("customauth.urls")),
     path('orders/', include("orders.urls")),
     path('', include('listings.urls')),
-    path('listing/<int:pk>/', ListingDetailView.as_view(), name='listingDetail'),
-    path('listings/', ListingView.as_view(), name='listingList' ),
     path('business/', business, name='business'),
     path('profile/', profile, name='profile'),
-    
+
 ]
 
 

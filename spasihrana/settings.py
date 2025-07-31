@@ -37,6 +37,7 @@ THIRD_PARTY_APPS = [
     'theme',
     'django_htmx',
     'template_partials',
+    'rest_framework',
 ]
 
 PROJECT_APPS = [
