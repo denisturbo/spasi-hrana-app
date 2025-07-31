@@ -64,7 +64,7 @@ python manage.py tailwind build
 
 - ✅ At least **10 Unit & Integration Tests**
 - **Asynchronous Views**
-- **Django REST Capabilities**
+- ✅ **Django REST Capabilities**
 - ✅ **Extended Django User Model**
 - **Project Deployment**
 
