@@ -1,3 +1,4 @@
+from cloudinary_storage.storage import MediaCloudinaryStorage
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from customauth.choices import BusinessTypeChoices, UserTypeChoices
@@ -38,7 +39,7 @@ class BusinessUser(CreatedUpdatedAtMixin, models.Model):
     user = models.OneToOneField(BaseSpasiHranaUser, on_delete=models.CASCADE)
     business_name = models.CharField(max_length=50)
     location = models.CharField(max_length=50)
-    profile_picture = models.ImageField(upload_to='pfps', null=True, blank=True)
+    profile_picture = models.ImageField(upload_to='pfps', null=True, blank=True,  storage=MediaCloudinaryStorage())
     business_type = models.CharField(max_length=10, choices=BusinessTypeChoices.choices)
 
     def __str__(self):

@@ -109,7 +109,7 @@ class ListingView(ListView):
     model = Listing
     template_name = 'customer/listings/listings.html'
     context_object_name = 'listings'
-    paginate_by = 10
+    paginate_by = 8
 
     def get_queryset(self):
         return Listing.objects.filter(status='available').select_related('connection').order_by('-created_at')
