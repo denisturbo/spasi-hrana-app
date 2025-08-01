@@ -16,10 +16,19 @@ class CreateOrder(LoginRequiredMixin, CreatedUpdatedAtMixin, View):
 
     def post(self, request, *args, **kwargs):
         listing = get_object_or_404(Listing, pk=kwargs['pk'])
+        customer = self.request.user.customeruser
+        has_order = Order.objects.filter(customer=customer,listing__status=ListingStatus.ORDERED).first()
+
+        if has_order:
+            return render(request, 'htmx-partials/error_partial.html', {
+                'listing': listing,
+                'customer': customer,
+                'has_order': has_order
+            })
 
         order = Order.objects.create(
             listing=listing,
-            customer=self.request.user.customeruser,
+            customer=customer,
             business=listing.connection,
         )
 
