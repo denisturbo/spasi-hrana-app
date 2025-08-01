@@ -1,64 +1,83 @@
-{%extends 'base.html'%}
+{% extends 'base.html' %}
+{% load static %}
 
-
-{%block content%}
-<section class="bg-gray-50 lg:py-12">
-     <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto ">
-      <div class="w-full bg-white rounded-lg shadow  sm:max-w-md xl:p-0 ">
-          <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-              <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
-                  Създай акаунт
-              </h1>
-              
-<form method='POST' class="space-y-4 md:space-y-6" action="{% url 'signup' %}">
-   {%csrf_token%}
-    <div class="grid gap-6 mb-6 md:grid-cols-2">
-         <div>
-            <label for="{{form.first_name.id_for_label}}" class="block mb-2 text-sm font-medium text-gray-900">Име</label>
-            {{form.first_name}}
-        </div>
-        <div>
-            <label for="{{form.last_name.id_for_label}}" class="block mb-2 text-sm font-medium text-gray-900">Фамилия</label>
-            {{form.last_name}}
-        </div>
-      </div>
-         <div class="grid gap-6 mb-6">
-        <div>
-            <label for="{{form.phone_number.id_for_label}}" class="block mb-2 text-sm font-medium text-gray-900">Телефонен Номер</label>
-            {{form.phone_number}}
-        </div>
-    </div>
-    <div class="mb-6">
-        <label for="{{form.username.id_for_label}}" class="block mb-2 text-sm font-medium text-gray-900">Потребителско име</label>
-        {{form.username}}
-    </div> 
-    <div class="mb-6">
-        <label for="{{form.email.id_for_label}}" class="block mb-2 text-sm font-medium text-gray-900">Email</label>
-        {{form.email}}
-    </div> 
-    <div class="mb-6">
-        <label for="{{form.password1.id_for_label}}" class="block mb-2 text-sm font-medium text-gray-900">Парола</label>
-        {{form.password1}}
-    </div> 
-    <div class="mb-6">
-        <label for="{{form.password2.id_for_label}}" class="block mb-2 text-sm font-medium text-gray-900">Потвърди парола</label>
-        {{form.password2}}
-    </div> 
-    <div>
+{% block content %}
+    <section class="bg-gray-50 lg:py-12">
+        <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto ">
+            <div class="w-full bg-white rounded-lg shadow  sm:max-w-md xl:p-0 ">
+                <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+                    <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
+                        Създай акаунт
+                    </h1>
+                    <form method='POST' class="space-y-4 md:space-y-6" action="{% url 'signup' %}">
+                        {% csrf_token %}
+                        <div class="grid gap-6 mb-6 md:grid-cols-2">
+                            <div>
+                                <label for="{{ form.first_name.id_for_label }}"
+                                       class="block mb-2 text-sm font-medium text-gray-900">Име</label>
+                                {{ form.first_name }}
+                            </div>
+                            <div>
+                                <label for="{{ form.last_name.id_for_label }}"
+                                       class="block mb-2 text-sm font-medium text-gray-900">Фамилия</label>
+                                {{ form.last_name }}
+                            </div>
+                        </div>
+                        <div class="grid gap-6 mb-6">
+                            <div x-data="app">
+                                <label for="{{ form.phone_number.id_for_label }}"
+                                       class="block mb-2 text-sm font-medium text-gray-900">Телефонен Номер</label>
+                                <input x-mask:dynamic="getMask" x-model="pn" id="{{ form.phone_number.id_for_label }}"
+                                       name="phone_number"
+                                       placeholder="Тел. номер"
+                                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                       maxlength=12>
+                            </div>
+                        </div>
+                        <div class="mb-6">
+                            <label for="{{ form.username.id_for_label }}"
+                                   class="block mb-2 text-sm font-medium text-gray-900">Потребителско име</label>
+                            {{ form.username }}
+                        </div>
+                        <div class="mb-6">
+                            <label for="{{ form.email.id_for_label }}"
+                                   class="block mb-2 text-sm font-medium text-gray-900">Email</label>
+                            {{ form.email }}
+                        </div>
+                        <div class="mb-6">
+                            <label for="{{ form.password1.id_for_label }}"
+                                   class="block mb-2 text-sm font-medium text-gray-900">Парола</label>
+                            {{ form.password1 }}
+                        </div>
+                        <div class="mb-6">
+                            <label for="{{ form.password2.id_for_label }}"
+                                   class="block mb-2 text-sm font-medium text-gray-900">Потвърди парола</label>
+                            {{ form.password2 }}
+                        </div>
+                        <div>
+                        </div>
+                        <div class="block mb-2 text-sm font-medium text-red-600">
+                            {% for k, v in form.errors.items %}
+                                {{ v }}<br>
+                            {% endfor %}
+                        </div>
+                        <div>
+                            <button type="submit"
+                                    class="w-full text-white bg-orange-600 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                                Създай акаунт
+                            </button>
+                            <input type="hidden" name="next" value="{{ next }}">
+                        </div>
+                        <p class="text-sm font-light text-gray-500">
+                            Вече имате акаунт? <a href="{% url 'signin' %}"
+                                                  class="font-medium text-orange-600 hover:underline dark:text-orange-500">Вход</a>
+                        </p>
+                    </form>
                 </div>
-                <div class="block mb-2 text-sm font-medium text-red-600">
-{% for k, v in form.errors.items %}
-        {{ v }}<br>
-   {% endfor %}
-                </div>
-    <div>
-      <button type="submit" class="w-full text-white bg-orange-600 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Създай акаунт</button>
-      <input type="hidden" name="next" value="{{ next }}">
-    </div>
-                      <p class="text-sm font-light text-gray-500">
-                      Вече имате акаунт? <a href="{%url 'signin' %}" class="font-medium text-orange-600 hover:underline dark:text-orange-500">Вход</a>
-                  </p>
-</form>
-</section>
-{%endblock%}
+            </div>
+        </div>
+    </section>
+{% endblock %}
 
+{% block js %}<script src="{% static 'js/phoneNumber.js' %}"></script>
+{% endblock js %}

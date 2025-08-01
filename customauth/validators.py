@@ -4,7 +4,7 @@ from django.utils.deconstruct import deconstructible
 
 @deconstructible
 class BulgarianPhoneNumberValidator:
-    regex = r'^(\+)?(359|0)8[789]\d{7}$'
+    regex = r'^08[789]\d{7}$'
     message = "Моля въведете валиден български телефонен номер."
     code = 'invalid_phone_number'
 

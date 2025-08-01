@@ -45,6 +45,12 @@ class CustomBaseSignupForm(UserCreationForm):
         })
     )
 
+    def clean_phone_number(self):
+        number = self.cleaned_data.get('phone_number')
+        if number:
+            cleaned = number.replace(' ', '')
+            return cleaned
+        return number
 
 class CustomerSignupForm(CustomBaseSignupForm):
     first_name = CharField(

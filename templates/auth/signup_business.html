@@ -1,95 +1,123 @@
-{%extends 'base.html'%}
+{% extends 'base.html' %}
+{% load static %}
 
-
-{%block content%}
-<section class="bg-gray-50 lg:py-12">
-     <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto ">
-      <div class="w-full bg-white rounded-lg shadow  sm:max-w-md xl:p-0 ">
-          <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-              <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
-                  Създай акаунт - ЗА БИЗНЕСИ
-              </h1>
-              
-<form method='POST'  enctype="multipart/form-data" class="space-y-4 md:space-y-6" action="{% url 'business-signup' %}">
-   {%csrf_token%}
-    <div class="grid gap-6 mb-6">
-         <div>
-            <label for="{{form.business_name.id_for_label}}" class="block mb-2 text-sm font-medium text-gray-900">Име на Бизнес</label>
-            {{form.business_name}}
-        </div>
-      </div>
-      <div class="grid gap-6 mb-6">
-         <div>
-            <label for="{{form.location.id_for_label}}" class="block mb-2 text-sm font-medium text-gray-900">Адрес на Бизнес</label>
-            {{form.location}}
-        </div>
-      </div>
-         <div class="grid gap-6 mb-6">
-        <div>
-            <label for="{{form.phone_number.id_for_label}}" class="block mb-2 text-sm font-medium text-gray-900">Телефонен Номер</label>
-            {{form.phone_number}}
-        </div>
-    </div>
-    <div class="mb-6">
-        <label for="{{form.email.id_for_label}}" class="block mb-2 text-sm font-medium text-gray-900">Email</label>
-        {{form.email}}
-    </div>
-      <div class="mb-6">
-        <label for="{{form.username.id_for_label}}" class="block mb-2 text-sm font-medium text-gray-900">Потребителско име</label>
-        {{form.username}}
-    </div> 
-    <div class="mb-6">
-        <label for="{{form.password1.id_for_label}}" class="block mb-2 text-sm font-medium text-gray-900">Парола</label>
-        {{form.password1}}
-    </div> 
-    <div class="mb-6">
-        <label for="{{form.password2.id_for_label}}" class="block mb-2 text-sm font-medium text-gray-900">Confirm парола</label>
-        {{form.password2}}
-    </div>
-    <div class="mb-6">
-        <label for="{{form.profile_picture.id_for_label}}" class="block mb-2 text-sm font-medium text-gray-900">Профилна снимка</label>
-        {{form.profile_picture}}
-    </div>
-    <div>
-<button id="dropdownHelperButton" data-dropdown-toggle="dropdownHelper" class="w-full text-white bg-orange-600 hover:bg-orange-700  focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center" type="button">Избери тип
-   <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-</svg>
-</button>
-
-<div id="dropdownHelper" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-60 ">
-                <ul class="p-3 space-y-1 text-sm text-gray-700 " aria-labelledby="dropdownRadioBgHoverButton">
-                {%for radio in form.business_type%}
-                <li>
-        <div class="flex p-2 rounded-sm hover:bg-gray-100">
-                    <div class="flex items-center h-5">
-                    {{ radio.tag }}
-                    </div>
-                    <div class="ms-2 text-sm">
-                    <label for="{{ radio.id_for_label }}" class="font-medium text-gray-900 ">
-                        <div>{{ radio.choice_label }}</div>
-                    </label>
-                              </div>
+{% block content %}
+    <section class="bg-gray-50 lg:py-12">
+        <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto ">
+            <div class="w-full bg-white rounded-lg shadow  sm:max-w-md xl:p-0 ">
+                <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+                    <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
+                        Създай акаунт - ЗА БИЗНЕСИ
+                    </h1>
+                    <form method='POST' enctype="multipart/form-data" class="space-y-4 md:space-y-6"
+                          action="{% url 'business-signup' %}">
+                        {% csrf_token %}
+                        <div class="grid gap-6 mb-6">
+                            <div>
+                                <label for="{{ form.business_name.id_for_label }}"
+                                       class="block mb-2 text-sm font-medium text-gray-900">Име на Бизнес</label>
+                                {{ form.business_name }}
                             </div>
+                        </div>
+                        <div class="grid gap-6 mb-6">
+                            <div>
+                                <label for="{{ form.location.id_for_label }}"
+                                       class="block mb-2 text-sm font-medium text-gray-900">Адрес на Бизнес</label>
+                                {{ form.location }}
+                            </div>
+                        </div>
+                        <div class="grid gap-6 mb-6">
+                            <div x-data="app">
+                                <label for="{{ form.phone_number.id_for_label }}"
+                                       class="block mb-2 text-sm font-medium text-gray-900">Телефонен Номер</label>
+                            <input x-mask:dynamic="getMask" x-model="pn" id="{{ form.phone_number.id_for_label }}" name="phone_number"
+                                   placeholder="Тел. номер"
+                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                   maxlength=12>
+                            </div>
+                        </div>
+                        <div class="mb-6">
+                            <label for="{{ form.email.id_for_label }}"
+                                   class="block mb-2 text-sm font-medium text-gray-900">Email</label>
+                            {{ form.email }}
+                        </div>
+                        <div class="mb-6">
+                            <label for="{{ form.username.id_for_label }}"
+                                   class="block mb-2 text-sm font-medium text-gray-900">Потребителско име</label>
+                            {{ form.username }}
+                        </div>
+                        <div class="mb-6">
+                            <label for="{{ form.password1.id_for_label }}"
+                                   class="block mb-2 text-sm font-medium text-gray-900">Парола</label>
+                            {{ form.password1 }}
+                        </div>
+                        <div class="mb-6">
+                            <label for="{{ form.password2.id_for_label }}"
+                                   class="block mb-2 text-sm font-medium text-gray-900">Confirm парола</label>
+                            {{ form.password2 }}
+                        </div>
+                        <div class="mb-6">
+                            <label for="{{ form.profile_picture.id_for_label }}"
+                                   class="block mb-2 text-sm font-medium text-gray-900">Профилна снимка</label>
+                            {{ form.profile_picture }}
+                        </div>
+                        <div>
+                            <button id="dropdownHelperButton" data-dropdown-toggle="dropdownHelper"
+                                    class="w-full text-white bg-orange-600 hover:bg-orange-700  focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center"
+                                    type="button">Избери тип
+                                <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                     fill="none" viewBox="0 0 10 6">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                          stroke-width="2" d="m1 1 4 4 4-4"/>
+                                </svg>
+                            </button>
 
-                </li>
-                {%endfor%}
-                </ul>
-                  </div>
-                </div>
-                <div class="block mb-2 text-sm font-medium text-red-600">
-{% for k, v in form.errors.items %}
-        {{ v }}<br>
-   {% endfor %}
-                </div>
-    <div>
-      <button type="submit" class="w-full text-white bg-orange-600 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Създай акаунт</button>
-      <input type="hidden" name="next" value="{{ next }}">
-    </div>
-                      <p class="text-sm font-light text-gray-500">
-                      Вече имате акаунт? <a href="{%url 'signin' %}" class="font-medium text-orange-600 hover:underline dark:text-orange-500">Вход</a>
-                  </p>
-</form>
-</section>
-{%endblock%}
+                            <div id="dropdownHelper"
+                                 class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-60 ">
+                                <ul class="p-3 space-y-1 text-sm text-gray-700 "
+                                    aria-labelledby="dropdownRadioBgHoverButton">
+                                    {% for radio in form.business_type %}
+                                        <li>
+                                            <div class="flex p-2 rounded-sm hover:bg-gray-100">
+                                                <div class="flex items-center h-5">
+                                                    {{ radio.tag }}
+                                                </div>
+                                                <div class="ms-2 text-sm">
+                                                    <label for="{{ radio.id_for_label }}"
+                                                           class="font-medium text-gray-900 ">
+                                                        <div>{{ radio.choice_label }}</div>
+                                                    </label>
+                                                </div>
+                                            </div>
 
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="block mb-2 text-sm font-medium text-red-600">
+                            {% for k, v in form.errors.items %}
+                                {{ v }}<br>
+                            {% endfor %}
+                        </div>
+                        <div>
+                            <button type="submit"
+                                    class="w-full text-white bg-orange-600 hover:bg-orange-700 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                                Създай акаунт
+                            </button>
+                            <input type="hidden" name="next" value="{{ next }}">
+                        </div>
+                        <p class="text-sm font-light text-gray-500">
+                            Вече имате акаунт? <a href="{% url 'signin' %}"
+                                                  class="font-medium text-orange-600 hover:underline dark:text-orange-500">Вход</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+{% block js %}
+        <script src="{% static 'js/phoneNumber.js' %}"></script>
+
+{% endblock js %}
