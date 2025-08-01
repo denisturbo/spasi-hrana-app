@@ -21,9 +21,8 @@ class CreateOrder(LoginRequiredMixin, CreatedUpdatedAtMixin, View):
 
         if has_order:
             return render(request, 'htmx-partials/error_partial.html', {
+                'has_order': has_order,
                 'listing': listing,
-                'customer': customer,
-                'has_order': has_order
             })
 
         order = Order.objects.create(
