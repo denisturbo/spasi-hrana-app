@@ -38,6 +38,8 @@ THIRD_PARTY_APPS = [
     'theme',
     'django_htmx',
     'rest_framework',
+    'cloudinary_storage',
+    'cloudinary',
 ]
 
 PROJECT_APPS = [
@@ -52,8 +54,6 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'cloudinary_storage',
-    'cloudinary',
     'django.contrib.staticfiles',
 ] + THIRD_PARTY_APPS + PROJECT_APPS
 
