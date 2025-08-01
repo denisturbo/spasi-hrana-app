@@ -112,7 +112,7 @@ class ListingView(ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        return Listing.objects.filter(status='available').order_by('-created_at')
+        return Listing.objects.filter(status='available').select_related('connection').order_by('-created_at')
 
     def get(self, request: HttpRequest, *args, **kwargs):
         self.object_list = self.get_queryset()
