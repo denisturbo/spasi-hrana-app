@@ -27,9 +27,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env.str("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool("DEBUG", default='False')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -38,7 +38,6 @@ THIRD_PARTY_APPS = [
     'theme',
     'django_htmx',
     'rest_framework',
-    'cloudinary_storage',
     'cloudinary',
 ]
 
@@ -49,6 +48,7 @@ PROJECT_APPS = [
     'orders',
 ]
 INSTALLED_APPS = [
+    'cloudinary_storage',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -61,7 +61,7 @@ TAILWIND_APP_NAME = 'theme'
 
 
 MIDDLEWARE = [
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    #'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -72,16 +72,16 @@ MIDDLEWARE = [
     "django_htmx.middleware.HtmxMiddleware",
 ]
 
-if DEBUG:
-    INSTALLED_APPS += [
-        'django_browser_reload',
-        'debug_toolbar']
-    MIDDLEWARE += [
-        'django_browser_reload.middleware.BrowserReloadMiddleware',
-    ]
-    INTERNAL_IPS = [
-        "127.0.0.1",
-    ]
+# if DEBUG:
+#     INSTALLED_APPS += [
+#         'django_browser_reload',
+#         'debug_toolbar']
+#     MIDDLEWARE += [
+#         'django_browser_reload.middleware.BrowserReloadMiddleware',
+#     ]
+#     INTERNAL_IPS = [
+#         "127.0.0.1",
+#     ]
 
 ROOT_URLCONF = 'spasihrana.urls'
 
@@ -163,13 +163,21 @@ CLOUDINARY_STORAGE = {
     'API_SECRET': os.getenv('API_SECRET'),
 }
 
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
 
 LOGIN_URL = '/auth/signin/'
 LOGIN_REDIRECT_URL = '/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'uploads'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+STORAGES = {
+  'default': 'cloudinary_storage.storage.MediaCloudinaryStorage',
+  'staticfiles': {
+    'BACKEND': 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
+  },
+}
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

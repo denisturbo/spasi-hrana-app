@@ -329,3 +329,4 @@ dist
 uploads
 __pycache__/
 *.pyc
+staticfiles
