@@ -20,7 +20,8 @@ class Listing(CreatedUpdatedAtMixin, models.Model):
 
     @property
     def eur_price(self) -> Decimal:
-        return round(self.price / Decimal("1.95"), 2)
+        EUR_TO_BGN_EXCHANGE_RATE = "1.95583"
+        return round(self.price / Decimal(EUR_TO_BGN_EXCHANGE_RATE), 2)
 
     def __str__(self):
         return self.title
