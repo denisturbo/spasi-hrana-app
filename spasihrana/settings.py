@@ -29,7 +29,8 @@ SECRET_KEY = env.str("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool("DEBUG", default='False')
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", subcast=str, default=["127.0.0.1", "localhost"])
+
 
 
 # Application definition
@@ -61,7 +62,6 @@ TAILWIND_APP_NAME = 'theme'
 
 
 MIDDLEWARE = [
-    #'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -171,12 +171,17 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'uploads'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
+
+STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
 STORAGES = {
-  'default': 'cloudinary_storage.storage.MediaCloudinaryStorage',
+  'default': DEFAULT_FILE_STORAGE,
   'staticfiles': {
-    'BACKEND': 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
+    'BACKEND': STATICFILES_STORAGE
   },
 }
+
 
 
 # Default primary key field type
@@ -184,3 +189,4 @@ STORAGES = {
 AUTH_USER_MODEL = 'customauth.BaseSpasiHranaUser'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
