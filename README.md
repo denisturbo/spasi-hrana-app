@@ -1,8 +1,8 @@
 # SpasiHrana
 
 SpasiHrana is a platform with the goal of eliminating the food waste.
-## Live Demo [NOT YET]
-## CHECK OUT HERE.. 
+## Live Demo
+[SpasiHrana - spasihrana.azurewebsites.net](https://spasihrana.azurewebsites.net/)
 # First Steps
 **1. Clone the repo**
 ```bash
@@ -66,5 +66,5 @@ python manage.py tailwind build
 - **Asynchronous Views**
 - ✅ **Django REST Capabilities**
 - ✅ **Extended Django User Model**
-- **Project Deployment**
+- ✅ **Project Deployment**
 
