@@ -27,10 +27,25 @@
                             </div>
                         </div>
                     </div>
-                    <hr class="my-6 md:my-8 border-gray-200 dark:border-gray-800"/>
+                    <div>
+                    <p class="mt-4 text-2xl font-extrabold text-gray-900 sm:text-3xl">
+                        Информация за ресторанта
+                    </p>
+                    <hr class="border-gray-200 dark:border-gray-800"/>
+                    <p class="font-normal text-gray-900 ">
+                    Адрес на обекта: {{ listing_detail.connection.location }}
+                    </p>
+                    <p>Тел. номер на обекта:{{ listing_detail.connection.user.phone_number }}</p>
+                </div>
+                    <div>
+                    <p class="mt-4 text-2xl font-extrabold text-gray-900 sm:text-3xl">
+                        Описание
+                    </p>
+                    <hr class="border-gray-200 dark:border-gray-800"/>
                     <p class="mb-6 text-gray-500 dark:text-gray-400">
                         {{ listing_detail.description }}
                     </p>
+                </div>
                 </div>
             </div>
         </div>
