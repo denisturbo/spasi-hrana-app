@@ -1,5 +1,5 @@
 from django.db.models.aggregates import Sum
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from orders.models import Order
 from customauth.models import BaseSpasiHranaUser, BusinessUser, CustomerUser
 from django.db.models import Count, Q
@@ -30,12 +30,13 @@ def faq(request):
 
 
 def business(request):
-    return render(request, 'landing/business.html')
+    if not request.user.is_authenticated:
+        return render(request, 'landing/business.html')
+    return redirect("/")
 
 
 def profile(request):
     current_user = request.user
-    print(request.user.user_type)
     customer = CustomerUser.objects.get(user=current_user)
     customer_orders = Order.objects.filter(customer=customer).order_by('-created_at')[:5]
     return render(request, 'customer/profile/profile.html', {"customer": customer,

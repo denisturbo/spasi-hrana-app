@@ -53,7 +53,6 @@ class OrdersTableList(PermissionRequiredMixin, ListView):
         context = self.get_context_data()
 
         if request.htmx:
-            print('vliza')
             return render(request, "htmx-partials/order_table_partial.html", context)
         else:
             return render(request, self.template_name, context)
@@ -69,10 +68,8 @@ class CompleteOrder(PermissionRequiredMixin, UpdateView):
 
         if request.htmx:
             current_page = request.GET.get('page', 1)
-            print(self.object.listing.status, "IMA LI NQKOI")
             self.object.listing.status = ListingStatus.COMPLETED
             self.object.listing.save()
-            print(self.object.listing.status, "IMA LI NQKOI")
 
             queryset = Order.objects.filter(business=self.request.user.businessuser, listing__status='ordered')
             paginate_by = 10

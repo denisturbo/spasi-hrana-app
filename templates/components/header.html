@@ -26,9 +26,11 @@
                     <li>
                         <a href="{%url 'faq'%}" class="block py-2 pr-4 pl-3 {%if request.path == '/faq/'%} text-yellow-500 {%endif%} text-white border-b hover:text-gray-900 border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-yellow-500 lg:p-0">ЧЗВ</a>
                     </li>
+                {% if not user.is_authenticated %}
                     <li>
                         <a href="{%url 'business'%}" class="block py-2 pr-4 pl-3 {%if request.path == '#'%} text-yellow-500 {%endif%} text-white border-b hover:text-gray-900 border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-yellow-500 lg:p-0">За БИЗНЕСИ</a>
                     </li>
+                {% endif %}
                 </ul>
             </div>
         </div> 

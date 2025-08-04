@@ -50,7 +50,6 @@ class Login(LoginView):
 
 class DeleteAccountView(LoginRequiredMixin, DeleteView):
     model = UserModel
-    print(model)
     success_url = reverse_lazy("index")
 
     def get_object(self, queryset=None):
@@ -62,7 +61,6 @@ class DeleteAccountView(LoginRequiredMixin, DeleteView):
 
     def get_template_names(self):
         user = self.request.user
-        print(user)
         if hasattr(user, 'businessuser'):
             return "business/settings.html"
         return "customer/profile/settings.html"

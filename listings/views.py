@@ -99,13 +99,13 @@ class InfoTableList(PermissionRequiredMixin, ListView):
         context = self.get_context_data()
 
         if request.htmx:
-            print('vliza')
             return render(request, "htmx-partials/listing_table_partial.html", context)
         else:
             return render(request, self.template_name, context)
 
 
-class ListingView(ListView):
+class ListingView(PermissionRequiredMixin, ListView):
+    permission_required = "customauth.can_order_listing"
     model = Listing
     template_name = 'customer/listings/listings.html'
     context_object_name = 'listings'
@@ -119,12 +119,12 @@ class ListingView(ListView):
         context = self.get_context_data()
 
         if request.htmx:
-            print('vliza')
             return render(request, "htmx-partials/listing_partial.html", context)
         else:
             return render(request, self.template_name, context)
 
-class ListingDetailView(DetailView):
+class ListingDetailView(PermissionRequiredMixin, DetailView):
+    permission_required = "customauth.can_order_listing"
     model = Listing
     template_name = 'customer/listings/listingdetail.html'
     context_object_name = 'listing_detail'
