@@ -4,6 +4,7 @@ from django.forms.widgets import TelInput, PasswordInput, RadioSelect, TextInput
 from customauth.choices import UserTypeChoices, BusinessTypeChoices
 from customauth.models import BusinessUser, BaseSpasiHranaUser, CustomerUser
 from django.contrib.auth.models import Group
+from django.db import transaction
 
 class CustomLoginForm(AuthenticationForm):
     username = EmailField(
@@ -52,6 +53,8 @@ class CustomBaseSignupForm(UserCreationForm):
             return cleaned
         return number
 
+
+
 class CustomerSignupForm(CustomBaseSignupForm):
     first_name = CharField(
                 label="Първо име",
@@ -71,7 +74,7 @@ class CustomerSignupForm(CustomBaseSignupForm):
                 'phone_number': TelInput(attrs={"placeholder": "Тел. номер", "class": 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'})
 
 }
-
+    @transaction.atomic
     def save(self, commit=True):
         user = super().save(commit=False)
         user.user_type = 'customer'
@@ -107,7 +110,7 @@ max_length=50, widget=TextInput(attrs={"placeholder": "ул. Лилия 1", "cla
                 'phone_number': TelInput(attrs={"placeholder": "Тел. номер", "class": 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5'})
 
 }
-
+    @transaction.atomic
     def save(self, commit=True):
         user = super().save(commit=False)
         user.user_type = UserTypeChoices.BUSINESS
