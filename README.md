@@ -60,11 +60,3 @@ python manage.py tailwind build
 - [AlpineJS](https://alpinejs.dev/) - Lightweight JS Framework
 
 
-# ⭐ SoftUni Bonus Requirements – Up to **15%** ⭐
-
-- ✅ At least **10 Unit & Integration Tests**
-- **Asynchronous Views**
-- ✅ **Django REST Capabilities**
-- ✅ **Extended Django User Model**
-- ✅ **Project Deployment**
-
